@@ -2,19 +2,18 @@ async function render() {}
 
 // render();
 
-import { App } from './components/app/app';
+import { App } from './components/app/app.js'
 
-const app = new App();
+const app = new App()
 
-app.init();
+app.init()
 
 // webpack HMR
-
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
   module.hot.addStatusHandler((status) => {
     if (status === 'apply') {
-      console.clear();
+      console.clear()
     }
-  });
+  })
 }

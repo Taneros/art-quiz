@@ -1,0 +1,33 @@
+body {
+  background-color: #ecf5ff;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+.application .container {
+  height: 100%;
+  width: 100%;
+  max-width: calc(80vw);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-menu {
+  height: auto;
+  width: 100%;
+}
+
+.main-menu.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-menu .button {
+  display: inline-block;
+  color: #ecf5ff;
+}
