@@ -15,7 +15,7 @@
     "mini-css-extract-plugin": "^1.6.2",
     "sass": "^1.42.1",
     "sass-loader": "^11.1.1",
-    "style-loader": "0.23.1",
+    "style-loader": "^3.3.1",
     "webpack": "^5.58.1",
     "webpack-cli": "^4.9.0",
     "webpack-dev-server": "^4.3.1",
@@ -23,5 +23,16 @@
   },
   "dependencies": {
     "progress-webpack-plugin": "^1.0.12"
-  }
+  },
+  "main": "webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolling-scopes-school/taneros-JSFE2021Q3.git"
+  },
+  "author": "Taneros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/taneros-JSFE2021Q3/issues"
+  },
+  "homepage": "https://github.com/rolling-scopes-school/taneros-JSFE2021Q3#readme"
 }
