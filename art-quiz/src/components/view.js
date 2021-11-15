@@ -10,13 +10,27 @@ import Templates from './templates/templates'
 
 export default {
   render(templateName, templates) {
-    // console.log(Templates[templateName])
-    const content = Templates[templateName]
+    console.log('\nview', templateName, templates)
+    let content = Templates[templateName]
 
     // TODO
     /**
      * template {{}} replacement logic <- take from HTML builder
      */
+
+    // get template names
+    let templateItems = content.match(/[^{\}]+(?=})/gm)
+    // console.log(templateItems)
+
+    templateItems.forEach((item, idx) => {
+      // console.log('item', item)
+      let regexp = new RegExp(`{{${item}}}`, 'g')
+      // console.log('regex', regexp);
+      // console.log('templates.item')
+      content = content.replace(regexp, templates[`${item}`])
+      // console.log(content)
+    })
+
     return content
   },
 }

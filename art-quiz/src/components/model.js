@@ -12,10 +12,19 @@ export default {
     return data
   },
 
-  getAuthor() {
+  getAuthor(cat) {
+    // TODO
+    /**
+     * pass category
+     * form array of authors from this category
+     *
+     */
+    // console.log('getAuthor(cat)', data)
+
+    //get one category of authors
     const authorArr = []
     data.forEach((el, idx) => {
-      authorArr.push(el.author)
+      if (el.category === cat) authorArr.push(el)
       // console.log(el.author)
     })
     return authorArr

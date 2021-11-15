@@ -7,11 +7,15 @@ function getRoute() {
 
 function handleHash() {
   const path = getRoute()
+  console.log('router working on hash', path)
   if (path) {
     const routeName = path + 'Route'
-    Controller[routeName]()
+    // TODO
+    /**
+     * add function on change of slash /realism
+     */
+    Controller[routeName]('expressionism')
   }
-  console.log('router working on hash', path)
 }
 
 export default {
@@ -20,3 +24,10 @@ export default {
     handleHash()
   },
 }
+
+// TODO
+/**
+ *
+ * add listener path change / slash
+ *
+ */

@@ -12,8 +12,8 @@ function setActiveGameMode(params) {
 }
 
 export default {
-  async authorRoute() {
-    const artists = Model.getAuthor()
+  async authorRoute(cat) {
+    const artists = Model.getAuthor(cat)
     console.log(artists)
     Author.setData(artists)
     Author.render()
