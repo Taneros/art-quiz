@@ -19,17 +19,19 @@ export default {
      */
 
     // get template names
-    let templateItems = content.match(/[^{\}]+(?=})/gm)
+    let templateItems = content.match(/[^{\}]+(?=})/gm) || []
     // console.log(templateItems)
 
-    templateItems.forEach((item, idx) => {
-      // console.log('item', item)
-      let regexp = new RegExp(`{{${item}}}`, 'g')
-      // console.log('regex', regexp);
-      // console.log('templates.item')
-      content = content.replace(regexp, templates[`${item}`])
-      // console.log(content)
-    })
+    if (templateItems.length) {
+      templateItems.forEach((item, idx) => {
+        // console.log('item', item)
+        let regexp = new RegExp(`{{${item}}}`, 'g')
+        // console.log('regex', regexp);
+        // console.log('templates.item')
+        content = content.replace(regexp, templates[`${item}`])
+        // console.log(content)
+      })
+    }
 
     return content
   },

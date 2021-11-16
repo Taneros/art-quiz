@@ -21,6 +21,7 @@ export default {
   },
 
   getLocalStorage(data) {
+    // console.log('settings', data, localStorage.getItem(data))
     if (localStorage.getItem(data)) {
       const storedData = JSON.parse(localStorage.getItem(data))
       return storedData

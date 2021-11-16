@@ -4,9 +4,9 @@ export default {
   <div class="container">
     <h2 class="author-quiz__text text">Кто автор этой картины?</h2>
     <div class="container">
-    <div id="next" class="btn btn-info">Next</div>
-    <div class="author-quiz__picture"></div>
-    <div id="next" class="btn btn-info">Prev</div>
+    <div id="prev" class="btn btn-info">Назад</div>
+    <div class="author-quiz__picture" style="background-image: url('./images/img/{{img}}.jpg');"></div>
+    <div id="next" class="btn btn-info">Вперед</div>
   </div>
     <div class="pagination"></div>
     <div class="answers">
