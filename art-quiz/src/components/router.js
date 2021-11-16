@@ -1,4 +1,5 @@
 import Controller from './controller.js'
+import Utils from './utilities.js'
 
 function getRoute() {
   const path = location.hash ? location.hash.slice(1) : ''
@@ -7,14 +8,17 @@ function getRoute() {
 }
 
 function handleHash() {
+  // TODO
+  /**
+   *
+   */
   const { quiz_type, params } = getRoute()
-  console.log('router working on hash', quiz_type, params)
+  console.log('router working on hash ->', quiz_type, params)
   if (quiz_type) {
     const routeName = quiz_type + 'Route'
-    // TODO
-    /**
-     * add function on change of slash /realism
-     */
+    Controller[routeName](params)
+  } else {
+    const routeName = 'mainRoute'
     Controller[routeName](params)
   }
 }
@@ -23,12 +27,15 @@ export default {
   init() {
     addEventListener('hashchange', handleHash)
     handleHash()
+    // console.log('handleHash() ->', handleHash())
+    // const { routeName, params } = handleHash()
+    // console.log('routeName, params ->', routeName, params)
   },
 }
 
 // TODO
 /**
  *
- * add listener path change / slash
+ * getRoute use from utils
  *
  */

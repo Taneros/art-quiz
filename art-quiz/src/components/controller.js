@@ -21,7 +21,7 @@ export default {
     // console.log(params.category)
     const authors = Model.getAuthor(params.category)
     console.log(authors)
-    Author.setData(authors)
+    Author.setData(authors, params.category)
     Author.render()
     // TODO
     /**
@@ -39,10 +39,9 @@ export default {
     /**
      * specify how many pictures to load ?
      *
-     *
-     *
      */
 
     setActiveGameMode(menuPictureQuiz)
   },
+  async mainRoute() {},
 }

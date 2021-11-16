@@ -1,7 +1,7 @@
 // import templates from '../templates/templates.js'
 import View from '../view.js'
 import Settings from '../settings.js'
-// import Utils from '../utilities.js'
+import Utils from '../utilities.js'
 
 //TODO
 /**
@@ -10,21 +10,18 @@ import Settings from '../settings.js'
  * shiffleArr()
  * getRndItem()
  * generateUnique()
- *
+ * sliceTen()
  *
  */
 
+let { quiz_type, params_cat } = Utils.getRoute()
 let resultsNode
 let prevBtn
 let nextBtn
-let items = Settings.getLocalStorage('items') || []
-let generatedAnswers
-let authorData = Settings.getLocalStorage('authorData') || {}
-console.log('authorData from storage->>>', authorData)
+let items = Settings.getLocalStorage(`items_${params_cat}`) || []
+// let authorData = Settings.getLocalStorage('authorData') || {}
+let allAuthorData = Settings.getLocalStorage(`allAuthorData_${params_cat}`) || [] // replace authorData with this
 let currentQuestionCardNum = 1
-
-// window.addEventListener('load', getLocalStorage)
-// window.addEventListener('beforeunload', setLocalStorage)
 
 function shuffleArr(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -57,74 +54,55 @@ function currentAuthor(params) {
   //TODO
   /**
    *
-   * write logic for checking answers and calling render
-   *
-   * addEventListener on author buttons
-   * check answers with the array of
-   *
    */
-  // store passed-in data
-  // grab an image
-  authorData.img = items[params].imageNum
-  console.log('correct author', items[params].author)
-  // push to answers arr and generate 3 extra
-  // authorData.answers.push(...generateUnique(items[0].author))
-  generateUnique(items[params].author).forEach((el, idx) => {
-    authorData[`answer-${idx + 1}`] = el
-  })
   // store locally
-  Settings.setLocalStorage('authorData', authorData)
-
-  // if (!Object.keys(authorData).length) {
-  //   console.log('if', !Object.keys(authorData).length)
-  //   // console.log('author.js', resultsNode)
-  //   // store passed-in data
-  //   // grab an image
-  //   authorData.img = items[params].imageNum
-  //   console.log('correct author', items[0].author)
-  //   // push to answers arr and generate 3 extra
-  //   // authorData.answers.push(...generateUnique(items[0].author))
-  //   generateUnique(items[params].author).forEach((el, idx) => {
-  //     authorData[`answer-${idx + 1}`] = el
-  //   })
-  //   // store locally
-  //   Settings.setLocalStorage('authorData', authorData)
-  // } else {
-  //   console.log('else', Settings.getLocalStorage('authorData'))
-  //   console.log('correct author', items[params].author)
-  //   authorData = Settings.getLocalStorage('authorData')
-  // }
+  // Settings.setLocalStorage('authorData', allAuthorData[params])
+  return allAuthorData[params]
 }
 
 export default {
   // save info from Model for rendering
-  setData(newItems) {
+  setData(newItems, params_cat) {
     // console.log('newItems', newItems)
     resultsNode = document.getElementById('results')
+    params_cat = params_cat
 
     // TODO
     /**
-     *
-     * check if set is already in storage - don't slice and don't save
      *
      */
 
     if (!items.length) {
       items = sliceTen(newItems)
       // write current set to getLocalStorage
-      Settings.setLocalStorage('items', items)
+      Settings.setLocalStorage(`items_${params_cat}`, items)
     }
 
-    // setting current author (-1 to adjust for array idx)
-    currentAuthor(currentQuestionCardNum - 1)
+    // generate 10 packs of questions for current category
+    if (!allAuthorData.length) {
+      items.forEach((el, idx) => {
+        console.log('allAuthors el, idx ->', el, idx)
+        const singleQuestionData = {}
+        // grab an image
+        singleQuestionData.img = el.imageNum
+        console.log('correct author', el.author)
+        // generate 3 extra
+        generateUnique(el.author).forEach((el, idx) => {
+          singleQuestionData[`answer-${idx + 1}`] = el
+        })
+        allAuthorData.push(singleQuestionData)
+      })
+      // store locally
+      Settings.setLocalStorage(`allAuthorData_${params_cat}`, allAuthorData)
+    }
   },
 
   render() {
-    console.log('render', authorData)
-    resultsNode.innerHTML = View.render('author', authorData)
+    // setting current author (-1 to adjust for array idx)
+    console.log('render', currentAuthor(currentQuestionCardNum - 1))
+    resultsNode.innerHTML = View.render('author', currentAuthor(currentQuestionCardNum - 1))
 
-    // prev and next button interation
-
+    // prev and next button iteration
     prevBtn = document.getElementById('prev')
     nextBtn = document.getElementById('next')
 
