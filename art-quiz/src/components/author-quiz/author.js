@@ -1,22 +1,11 @@
 // import templates from '../templates/templates.js'
 import View from '../view.js'
+import Settings from '../settings.js'
 
 let resultsNode
 let items
 let generatedAnswers
 let authorData = {}
-
-function setLocalStorage() {
-  localStorage.setItem('authorData', JSON.stringify(authorData))
-}
-
-function getLocalStorage() {
-  if (localStorage.getItem('authorData')) {
-    authorData = JSON.parse(localStorage.getItem('authorData'))
-    return true
-  }
-  return false
-}
 
 // window.addEventListener('load', getLocalStorage)
 // window.addEventListener('beforeunload', setLocalStorage)
@@ -48,7 +37,6 @@ export default {
   // save info from Model for rendering
   setData(newItems) {
     resultsNode = document.getElementById('results')
-
     // TODO
     /**
      *
@@ -57,7 +45,8 @@ export default {
      *
      *
      */
-    if (!getLocalStorage()) {
+    if (Settings.getLocalStorage(authorData)) {
+      console.log(!Settings.getLocalStorage(authorData))
       // console.log('author.js', resultsNode)
       // store passed-in data
       items = newItems
@@ -69,13 +58,26 @@ export default {
       generateThreeUnique(newItems[0].author).forEach((el, idx) => {
         authorData[`answer-${idx + 1}`] = el
       })
-      setLocalStorage()
-      // console.log('author.js', authorData)
       // store locally
+      Settings.setLocalStorage('authorData', authorData)
+
+      //TODO
+      /**
+       *
+       * write logic for checking answers and calling render
+       *
+       * addEventListener
+       * check answers with the array of
+       *
+       */
+    } else {
+      console.log('else', Settings.getLocalStorage('authorData'))
+      authorData = Settings.getLocalStorage('authorData')
     }
   },
 
   render() {
+    console.log('render', authorData)
     resultsNode.innerHTML = View.render('author', authorData)
   },
 }

@@ -3,6 +3,7 @@ import Author from './author-quiz/author.js'
 
 let activeGameMode
 
+// menu buttons
 let menuAuthorQuiz
 let menuPictureQuiz
 
