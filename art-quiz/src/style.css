@@ -55,12 +55,17 @@ body {
   margin-top: 2rem;
   width: 100%;
 }
-.author-quiz .container {
-  /* width: 100%; */
+.author-quiz .container:nth-child(2) {
+  background-color: darkgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .author-quiz__picture {
   margin-top: 1rem;
+  margin: 0 1rem;
 }
 
 .author-quiz__picture {
