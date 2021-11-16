@@ -2,19 +2,20 @@ import Controller from './controller.js'
 
 function getRoute() {
   const path = location.hash ? location.hash.slice(1) : ''
-  return path
+  const [quiz_type, category = 'expressionism'] = path.split('/')
+  return { quiz_type, params: { category } }
 }
 
 function handleHash() {
-  const path = getRoute()
-  console.log('router working on hash', path)
-  if (path) {
-    const routeName = path + 'Route'
+  const { quiz_type, params } = getRoute()
+  console.log('router working on hash', quiz_type, params)
+  if (quiz_type) {
+    const routeName = quiz_type + 'Route'
     // TODO
     /**
      * add function on change of slash /realism
      */
-    Controller[routeName]('expressionism')
+    Controller[routeName](params)
   }
 }
 

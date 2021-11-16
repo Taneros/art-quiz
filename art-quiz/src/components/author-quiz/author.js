@@ -45,6 +45,7 @@ function generateThreeUnique(params) {
 }
 
 export default {
+  // save info from Model for rendering
   setData(newItems) {
     resultsNode = document.getElementById('results')
 

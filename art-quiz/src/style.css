@@ -41,7 +41,8 @@ body {
 }
 
 .button.btn-info.active {
-  background-color: darkcyan;
+  background-color: rgb(25 137 189);
+  border-color: #0346918a;
 }
 
 #results {
