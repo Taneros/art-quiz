@@ -131,6 +131,7 @@ export default {
      * store round__expressionism
      * {1: ['correct', btn#], 2: ['', btn#]}
      *
+     * idea???
      * function checkUniqueElArr for frunction (arr)
      *
      * let buffSet = Set()
@@ -168,32 +169,21 @@ export default {
         if (el.innerHTML === items.filter((el) => el.imageNum === currentAuthor(currentQuestionCardNum - 1).img)[0].author) {
           // console.log('correct!')
           el.classList.add('correct')
-          // answerResult = 'correct'
-          // answerResult.question = currentQuestionCardNum - 1
-          // answerResult.el_id = el.id
-          // score[currentQuestionCardNum - 1].el_id = el.id
           answerResult.el_id = el.id
           answerResult.correct = 1
         } else {
           el.classList.add('notcorrect')
-          // answerResult = 'not correct'
-          // answerResult.question = currentQuestionCardNum - 1
-          // answerResult.el_id = el.id
-          // score[currentQuestionCardNum - 1].el_id = el.id
           answerResult.el_id = el.id
           answerResult.correct = 0
         }
-        // score.filter((el) => el.question === currentQuestionCardNum - 1).length
         if (!score[currentQuestionCardNum - 1].el_id) {
           pressedOnce = true
-          // score.push(answerResult)
           score[currentQuestionCardNum - 1].el_id = answerResult.el_id
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_${params.category}`, score)
         }
       })
     })
-    //
     // console.log(answerBtns)
 
     // event listener for prev
@@ -202,7 +192,6 @@ export default {
         currentQuestionCardNum--
         // console.log(currentQuestionCardNum)
         // take next question from the pack
-        // this.setData(items, params.category)
         this.render()
       }
     })
@@ -210,7 +199,6 @@ export default {
       if (currentQuestionCardNum < 10 && currentQuestionCardNum >= 1) {
         currentQuestionCardNum++
         // console.log(currentQuestionCardNum)
-        // this.setData(items, params.category)
         this.render()
       }
     })
