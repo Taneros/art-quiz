@@ -99,6 +99,7 @@ body {
   grid-template-columns: 50% 50%;
   justify-items: center;
   align-items: center;
+  gap: 5px;
 }
 
 .answers li {
@@ -109,7 +110,7 @@ body {
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  background-color: inherit;
+  /* background-color: inherit; */
 }
 
 .answers li div {
@@ -118,9 +119,23 @@ body {
   background-color: #0dcaf0;
 }
 
-.answers li.correct {
+/* .answers li.correct {
   background-color: lightgreen;
 }
 .answers li.notcorrect {
   background-color: lightcoral;
+} */
+
+.notcorrect {
+  background-color: lightcoral;
+}
+
+.correct {
+  background-color: lightgreen;
+}
+
+.scale {
+  transform: scale(1.1);
+  z-index: 10;
+  border-color: royalblue;
 }

@@ -24,16 +24,16 @@ let items
 let allAuthorData
 let currentQuestionCardNum = 1
 let score = [
-  { question: 0, el_id: '', correct: 0 },
-  { question: 1, el_id: '', correct: 0 },
-  { question: 2, el_id: '', correct: 0 },
-  { question: 3, el_id: '', correct: 0 },
-  { question: 4, el_id: '', correct: 0 },
-  { question: 5, el_id: '', correct: 0 },
-  { question: 6, el_id: '', correct: 0 },
-  { question: 7, el_id: '', correct: 0 },
-  { question: 8, el_id: '', correct: 0 },
-  { question: 9, el_id: '', correct: 0 },
+  { question: 0, el_id: '', correct: null },
+  { question: 1, el_id: '', correct: null },
+  { question: 2, el_id: '', correct: null },
+  { question: 3, el_id: '', correct: null },
+  { question: 4, el_id: '', correct: null },
+  { question: 5, el_id: '', correct: null },
+  { question: 6, el_id: '', correct: null },
+  { question: 7, el_id: '', correct: null },
+  { question: 8, el_id: '', correct: null },
+  { question: 9, el_id: '', correct: null },
 ]
 
 function shuffleArr(a) {
@@ -127,10 +127,7 @@ export default {
 
     // TODO
     /**
-     *
-     * store round__expressionism
-     * {1: ['correct', btn#], 2: ['', btn#]}
-     *
+
      * idea???
      * function checkUniqueElArr for frunction (arr)
      *
@@ -147,12 +144,33 @@ export default {
      * if (buffArr.length = buffArr.legth) return true
      *
      * return false
-     *
-     *
      * or just premade object to avoid errors
      *
+     * 
+     * 
+     * render nav
+     * 
+     * take score for each el
+     * 
+     * assign class
+     * 
+     *
+     * 
+     * 
      *
      */
+
+    // render pagination put in separate function?
+
+    score.forEach((el, idx) => {
+      // console.log('el.correct', el.correct)
+      if (el.correct === 1) {
+        document.getElementById(`pg_${idx + 1}`).classList.add('correct')
+      } else if (el.correct !== null) {
+        document.getElementById(`pg_${idx + 1}`).classList.add('notcorrect')
+      }
+      document.getElementById(`pg_${currentQuestionCardNum}`).parentNode.classList.add('scale')
+    })
 
     // console.log('resultsNode', resultsNode)
     // prev and next button iteration
@@ -163,6 +181,16 @@ export default {
     answerBtns = document.getElementsByClassName('answers__answer')
     let pressedOnce = false
     Array.from(answerBtns).forEach((el) => {
+      // render btn color
+      if (score[currentQuestionCardNum - 1].correct === 1) {
+        if (el.id === score[currentQuestionCardNum - 1].el_id) {
+          el.classList.add('correct')
+        }
+      } else {
+        if (el.id === score[currentQuestionCardNum - 1].el_id) {
+          el.classList.add('notcorrect')
+        }
+      }
       el.addEventListener('click', () => {
         let answerResult = { el_id: '', correct: 0 }
         // console.log(el.innerHTML)
@@ -182,11 +210,12 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_${params.category}`, score)
         }
+        this.render()
       })
     })
     // console.log(answerBtns)
 
-    // event listener for prev
+    // event listeners for prev next buttons
     prevBtn.addEventListener('click', () => {
       if (currentQuestionCardNum < 11 && currentQuestionCardNum > 1) {
         currentQuestionCardNum--

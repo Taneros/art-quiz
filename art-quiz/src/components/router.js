@@ -3,7 +3,7 @@ import Utils from './utilities.js'
 
 function getRoute() {
   const path = location.hash ? location.hash.slice(1) : ''
-  const [quiz_type, category = 'expressionism'] = path.split('/')
+  const [quiz_type, category = 'renaissance'] = path.split('/')
   return { quiz_type, params: { category } }
 }
 
