@@ -117,3 +117,10 @@ body {
 .answers li:hover {
   background-color: #0dcaf0;
 }
+
+.answers li.correct {
+  background-color: lightgreen;
+}
+.answers li.notcorrect {
+  background-color: lightcoral;
+}

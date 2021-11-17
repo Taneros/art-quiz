@@ -32,7 +32,6 @@ export default {
         // console.log(content)
       })
     }
-
     return content
   },
 }
