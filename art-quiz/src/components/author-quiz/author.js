@@ -14,27 +14,17 @@ import Utils from '../utilities.js'
  *
  */
 
-let { quiz_type, params } = Utils.getRoute()
+// let { quiz_type, params } = Utils.getRoute()
 // console.log('params ->', params.category)
+let category
 let resultsNode
 let prevBtn
 let nextBtn
 let answerBtns
 let items
 let allAuthorData
-let currentQuestionCardNum = 1
-let score = [
-  { question: 0, el_id: '', correct: null },
-  { question: 1, el_id: '', correct: null },
-  { question: 2, el_id: '', correct: null },
-  { question: 3, el_id: '', correct: null },
-  { question: 4, el_id: '', correct: null },
-  { question: 5, el_id: '', correct: null },
-  { question: 6, el_id: '', correct: null },
-  { question: 7, el_id: '', correct: null },
-  { question: 8, el_id: '', correct: null },
-  { question: 9, el_id: '', correct: null },
-]
+let currentQuestionCardNum
+let score
 
 function shuffleArr(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -47,7 +37,7 @@ function shuffleArr(a) {
 function getRndItem() {
   const itemsLength = Object.keys(items).length
   const random = Math.floor(Math.random() * itemsLength)
-  console.log(random)
+  // console.log(random)
   return items[random].author
 }
 
@@ -56,7 +46,7 @@ function generateUnique(params) {
   while (mySet.size < 4) {
     mySet.add(getRndItem())
   }
-  console.log(mySet)
+  // console.log(mySet)
   return shuffleArr(Array.from(mySet))
 }
 
@@ -74,26 +64,40 @@ function currentAuthor(params) {
   return allAuthorData[params]
 }
 
+function resetScore() {
+  return [
+    { question: 0, el_id: '', correct: null },
+    { question: 1, el_id: '', correct: null },
+    { question: 2, el_id: '', correct: null },
+    { question: 3, el_id: '', correct: null },
+    { question: 4, el_id: '', correct: null },
+    { question: 5, el_id: '', correct: null },
+    { question: 6, el_id: '', correct: null },
+    { question: 7, el_id: '', correct: null },
+    { question: 8, el_id: '', correct: null },
+    { question: 9, el_id: '', correct: null },
+  ]
+}
+
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
-    // console.log('newItems', newItems)
+    console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
-    params_cat = params_cat
-    items = Settings.getLocalStorage(`items_${params_cat}`) || []
-    allAuthorData = Settings.getLocalStorage(`allAuthorData_${params_cat}`) || []
-
+    category = params_cat
+    items = Settings.getLocalStorage(`items_${category}`) || []
+    allAuthorData = Settings.getLocalStorage(`allAuthorData_${category}`) || []
+    score = Settings.getLocalStorage(`score_${category}`) || resetScore()
+    currentQuestionCardNum = 1
     // TODO
     /**
      *
      */
 
-    // restoreFromLocal(items, params_cat)
-
     if (!items.length) {
       items = sliceTen(newItems)
       // write current set to getLocalStorage
-      Settings.setLocalStorage(`items_${params_cat}`, items)
+      Settings.setLocalStorage(`items_${category}`, items)
     }
 
     // generate 10 packs of questions for current category
@@ -103,7 +107,7 @@ export default {
         const singleQuestionData = {}
         // grab an image
         singleQuestionData.img = el.imageNum
-        console.log('correct author', el.author)
+        // console.log('correct author', el.author)
         // generate 3 extra
         generateUnique(el.author).forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
@@ -111,52 +115,23 @@ export default {
         allAuthorData.push(singleQuestionData)
       })
       // store locally
-      Settings.setLocalStorage(`allAuthorData_${params_cat}`, allAuthorData)
+      Settings.setLocalStorage(`allAuthorData_${category}`, allAuthorData)
     }
   },
 
   /******************* R E N D E R *******************/
 
-  render() {
+  async render() {
     // setting current author (-1 to adjust for array idx)
-    console.log('render', currentAuthor(currentQuestionCardNum - 1))
+    console.log('render:', currentAuthor(currentQuestionCardNum - 1))
     // render page
     resultsNode.innerHTML = View.render('author', currentAuthor(currentQuestionCardNum - 1))
-
-    score = Settings.getLocalStorage(`score_${params.category}`) === false ? score : Settings.getLocalStorage(`score_${params.category}`)
+    console.log(`score_${category}`)
+    score = Settings.getLocalStorage(`score_${category}`) || resetScore()
+    console.log('render-score:', score)
 
     // TODO
     /**
-
-     * idea???
-     * function checkUniqueElArr for frunction (arr)
-     *
-     * let buffSet = Set()
-     *
-     * arr.forEach(el) {
-     *
-     * buffSet.add(el)
-     *
-     * }
-     *
-     * let buffArr = Array.from(buffSet)
-     *
-     * if (buffArr.length = buffArr.legth) return true
-     *
-     * return false
-     * or just premade object to avoid errors
-     *
-     * 
-     * 
-     * render nav
-     * 
-     * take score for each el
-     * 
-     * assign class
-     * 
-     *
-     * 
-     * 
      *
      */
 
@@ -208,7 +183,7 @@ export default {
           pressedOnce = true
           score[currentQuestionCardNum - 1].el_id = answerResult.el_id
           score[currentQuestionCardNum - 1].correct = answerResult.correct
-          Settings.setLocalStorage(`score_${params.category}`, score)
+          Settings.setLocalStorage(`score_${category}`, score)
         }
         this.render()
       })
