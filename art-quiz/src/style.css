@@ -87,9 +87,6 @@ body {
   width: 100%;
 }
 
-.pagination {
-}
-
 .answers {
   width: 100%;
   margin-top: 1rem;
@@ -166,3 +163,45 @@ main nav source
 https://getbootstrap.com/docs/5.0/components/navs-tabs/
 
 */
+
+/* Picture quiz styles */
+
+.picture-quiz {
+  margin-top: 2rem;
+  width: 100%;
+}
+.picture-quiz .container:nth-child(2) {
+  /* background-color: darkgray; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.picture-quiz__picture {
+  margin-top: 1rem;
+  margin: 0 1rem;
+}
+
+.picture-quiz__picture {
+  height: 60vh;
+  max-height: 600px;
+  /* border-radius: 15px; */
+  width: 100%;
+}
+
+.picture-quiz__picture {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+}
+
+.picture-quiz__picture__item {
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  box-shadow: 2px 2px 15px #000;
+}
