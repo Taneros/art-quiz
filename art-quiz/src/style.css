@@ -157,6 +157,10 @@ body {
   justify-content: space-between;
 }
 
+.dropdown-menu .badge {
+  margin-left: 10px;
+}
+
 /* 
 main nav source
 https://getbootstrap.com/docs/5.0/components/navs-tabs/

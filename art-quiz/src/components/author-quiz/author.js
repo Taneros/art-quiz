@@ -59,8 +59,6 @@ function currentAuthor(params) {
   /**
    *
    */
-  // store locally
-  // Settings.setLocalStorage('authorData', allAuthorData[params])
   return allAuthorData[params]
 }
 
