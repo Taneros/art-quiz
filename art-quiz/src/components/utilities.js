@@ -10,16 +10,16 @@ export default {
     }
     return a
   },
-  getRndItem() {
+  getRndItem(items) {
     const itemsLength = Object.keys(items).length
     const random = Math.floor(Math.random() * itemsLength)
     // console.log(random)
     return items[random].author
   },
-  generateUnique(params) {
+  generateUnique(params, items) {
     let mySet = new Set().add(params)
     while (mySet.size < 4) {
-      mySet.add(this.getRndItem())
+      mySet.add(this.getRndItem(items))
     }
     // console.log(mySet)
     return this.shuffleArr(Array.from(mySet))

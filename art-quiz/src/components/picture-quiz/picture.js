@@ -2,14 +2,7 @@
 /**
  *
  *
- * make index-static-picture.html
- *
- *
- *
- *
- * make template > add to templates.js
- *
- * refactor author.js > move common methods to utilities
+
  *
  * rename local storage values to author___
  * picture___

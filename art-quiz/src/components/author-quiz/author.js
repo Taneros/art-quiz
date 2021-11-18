@@ -49,7 +49,7 @@ export default {
         singleQuestionData.img = el.imageNum
         // console.log('correct author', el.author)
         // generate 3 extra
-        Utils.generateUnique(el.author).forEach((el, idx) => {
+        Utils.generateUnique(el.author, items).forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
         })
         allAuthorData.push(singleQuestionData)

@@ -8,11 +8,7 @@ function getRoute() {
 }
 
 function handleHash() {
-  // TODO
-  /**
-   *
-   */
-  if (location.hash.slice(1).split('/').length === 1) location.hash += `/renaissance`
+  if (location.hash.slice(1).split('/').length === 1) location.hash += `/avant-garde`
   const { quiz_type, params } = getRoute()
   console.log('router working on hash ->', quiz_type, params)
   if (quiz_type) {
@@ -32,7 +28,7 @@ function handleSlash() {
     const catInnerHTML = e.target.id
     // console.log(catInnerHTML)
     const path = location.hash
-    console.log('path', path)
+    // console.log('path', path)
     const [hash, cat] = location.hash.slice(1).split('/')
     location.hash = `#${hash}/${catInnerHTML}`
     handleHash()
