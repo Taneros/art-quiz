@@ -1,16 +1,9 @@
-// import templates from '../templates/templates.js'
 import View from '../view.js'
 import Settings from '../settings.js'
 import Utils from '../utilities.js'
 
 //TODO
 /**
- * move to utilities reused functions between quiz types:
- *
- * shiffleArr()
- * getRndItem()
- * generateUnique()
- * sliceTen()
  *
  */
 
@@ -26,55 +19,8 @@ let allAuthorData
 let currentQuestionCardNum
 let score
 
-function shuffleArr(a) {
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
-function getRndItem() {
-  const itemsLength = Object.keys(items).length
-  const random = Math.floor(Math.random() * itemsLength)
-  // console.log(random)
-  return items[random].author
-}
-
-function generateUnique(params) {
-  let mySet = new Set().add(params)
-  while (mySet.size < 4) {
-    mySet.add(getRndItem())
-  }
-  // console.log(mySet)
-  return shuffleArr(Array.from(mySet))
-}
-
-function sliceTen(params) {
-  return params.slice(0, 10)
-}
-
 function currentAuthor(params) {
-  //TODO
-  /**
-   *
-   */
   return allAuthorData[params]
-}
-
-function resetScore() {
-  return [
-    { question: 0, el_id: '', correct: null },
-    { question: 1, el_id: '', correct: null },
-    { question: 2, el_id: '', correct: null },
-    { question: 3, el_id: '', correct: null },
-    { question: 4, el_id: '', correct: null },
-    { question: 5, el_id: '', correct: null },
-    { question: 6, el_id: '', correct: null },
-    { question: 7, el_id: '', correct: null },
-    { question: 8, el_id: '', correct: null },
-    { question: 9, el_id: '', correct: null },
-  ]
 }
 
 export default {
@@ -85,15 +31,11 @@ export default {
     category = params_cat
     items = Settings.getLocalStorage(`items_${category}`) || []
     allAuthorData = Settings.getLocalStorage(`allAuthorData_${category}`) || []
-    score = Settings.getLocalStorage(`score_${category}`) || resetScore()
+    score = Settings.getLocalStorage(`score_${category}`) || Utils.resetScore()
     currentQuestionCardNum = 1
-    // TODO
-    /**
-     *
-     */
 
     if (!items.length) {
-      items = sliceTen(newItems)
+      items = Utils.sliceTen(newItems)
       // write current set to getLocalStorage
       Settings.setLocalStorage(`items_${category}`, items)
     }
@@ -107,7 +49,7 @@ export default {
         singleQuestionData.img = el.imageNum
         // console.log('correct author', el.author)
         // generate 3 extra
-        generateUnique(el.author).forEach((el, idx) => {
+        Utils.generateUnique(el.author).forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
         })
         allAuthorData.push(singleQuestionData)
@@ -125,7 +67,7 @@ export default {
     // render page
     resultsNode.innerHTML = View.render('author', currentAuthor(currentQuestionCardNum - 1))
     console.log(`score_${category}`)
-    score = Settings.getLocalStorage(`score_${category}`) || resetScore()
+    score = Settings.getLocalStorage(`score_${category}`) || Utils.resetScore()
     console.log('render-score:', score)
 
     // TODO
@@ -152,7 +94,6 @@ export default {
 
     // answer buttons
     answerBtns = document.getElementsByClassName('answers__answer')
-    let pressedOnce = false
     Array.from(answerBtns).forEach((el) => {
       // render btn color
       if (score[currentQuestionCardNum - 1].correct === 1) {
@@ -178,7 +119,6 @@ export default {
           answerResult.correct = 0
         }
         if (!score[currentQuestionCardNum - 1].el_id) {
-          pressedOnce = true
           score[currentQuestionCardNum - 1].el_id = answerResult.el_id
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_${category}`, score)
