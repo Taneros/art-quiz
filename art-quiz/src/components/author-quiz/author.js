@@ -1,6 +1,7 @@
 import View from '../view.js'
 import Settings from '../settings.js'
 import Utils from '../utilities.js'
+import Model from '../model.js'
 
 //TODO
 /**
@@ -15,33 +16,50 @@ let prevBtn
 let nextBtn
 let answerBtns
 let items
-let allAuthorData
+let questionPack
 let currentQuestionCardNum
 let score
 
-function currentAuthor(params) {
-  return allAuthorData[params]
+function getCurrentQuestionSet(params) {
+  return questionPack[params]
+}
+
+function checkDoublicates(newItems) {
+  let noDublicates = newItems.reduce((arr, item) => {
+    const removed = arr.filter((i) => i['author'] !== item['author'])
+    return [...removed, item]
+  }, [])
+  if (noDublicates.length < 10) {
+    console.log('less than 10 getting more')
+    noDublicates.push(Model.getRandom())
+    console.log(noDublicates)
+    checkDoublicates(noDublicates)
+    // checkDoubles(noDublicates.push(Model.getRandom()))
+  }
+  return noDublicates
 }
 
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
     // console.log('newItems, params_cat:', newItems, params_cat)
+    newItems = checkDoublicates(newItems)
+    console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     category = params_cat
-    items = Settings.getLocalStorage(`items_${category}`) || []
-    allAuthorData = Settings.getLocalStorage(`allAuthorData_${category}`) || []
-    score = Settings.getLocalStorage(`score_${category}`) || Utils.resetScore()
+    items = Settings.getLocalStorage(`items_auth_${category}`) || []
+    questionPack = Settings.getLocalStorage(`questionPack_auth_${category}`) || []
+    score = Settings.getLocalStorage(`score_auth_${category}`) || Utils.resetScore()
     currentQuestionCardNum = 1
 
     if (!items.length) {
       items = Utils.sliceTen(newItems)
       // write current set to getLocalStorage
-      Settings.setLocalStorage(`items_${category}`, items)
+      Settings.setLocalStorage(`items_auth_${category}`, items)
     }
 
     // generate 10 packs of questions for current category
-    if (!allAuthorData.length) {
+    if (!questionPack.length) {
       items.forEach((el, idx) => {
         // console.log('allAuthors el, idx ->', el, idx)
         const singleQuestionData = {}
@@ -52,22 +70,22 @@ export default {
         Utils.generateUnique(el.author, items).forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
         })
-        allAuthorData.push(singleQuestionData)
+        questionPack.push(singleQuestionData)
       })
       // store locally
-      Settings.setLocalStorage(`allAuthorData_${category}`, allAuthorData)
+      Settings.setLocalStorage(`questionPack_auth_${category}`, questionPack)
     }
   },
 
   /******************* R E N D E R *******************/
 
-  async render() {
+  render() {
     // setting current author (-1 to adjust for array idx)
-    console.log('render:', currentAuthor(currentQuestionCardNum - 1))
+    console.log('render:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // render page
-    resultsNode.innerHTML = View.render('author', currentAuthor(currentQuestionCardNum - 1))
-    console.log(`score_${category}`)
-    score = Settings.getLocalStorage(`score_${category}`) || Utils.resetScore()
+    resultsNode.innerHTML = View.render('author', getCurrentQuestionSet(currentQuestionCardNum - 1))
+    console.log(`score_auth_${category}`)
+    score = Settings.getLocalStorage(`score_auth_${category}`) || Utils.resetScore()
     console.log('render-score:', score)
 
     // TODO
@@ -108,7 +126,7 @@ export default {
       el.addEventListener('click', () => {
         let answerResult = { el_id: '', correct: 0 }
         // console.log(el.innerHTML)
-        if (el.innerHTML === items.filter((el) => el.imageNum === currentAuthor(currentQuestionCardNum - 1).img)[0].author) {
+        if (el.innerHTML === items.filter((el) => el.imageNum === getCurrentQuestionSet(currentQuestionCardNum - 1).img)[0].author) {
           // console.log('correct!')
           el.classList.add('correct')
           answerResult.el_id = el.id
@@ -121,7 +139,7 @@ export default {
         if (!score[currentQuestionCardNum - 1].el_id) {
           score[currentQuestionCardNum - 1].el_id = answerResult.el_id
           score[currentQuestionCardNum - 1].correct = answerResult.correct
-          Settings.setLocalStorage(`score_${category}`, score)
+          Settings.setLocalStorage(`score_auth_${category}`, score)
         }
         this.render()
       })

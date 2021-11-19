@@ -5,6 +5,7 @@ final score for category overlay
 
 add score button to nav menu
 
+add image name to the overlay
 
 FIX:
   window on load handleSlash() in router

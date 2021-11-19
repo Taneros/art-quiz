@@ -71,9 +71,9 @@ export default {
 
         //TODO
         /**
-         *redo image generation
-         get an generate pack of 10 generateUnique
-         get random from model
+         * redo image generation
+         * get an generate pack of 10 generateUnique
+         * get random from model
          * */
         // console.log('correct image', el.imageNum)
         answers[`${el.author}`] = el.imageNum
