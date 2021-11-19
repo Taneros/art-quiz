@@ -1,7 +1,9 @@
 import Model from './model.js'
 import Author from './author-quiz/author.js'
+import Picture from './picture-quiz/picture.js'
 
 let activeGameMode
+let activeCat
 
 // menu buttons
 let menuAuthorQuiz
@@ -11,12 +13,19 @@ let menuPictureQuiz
 let catDropdown
 let catDropdownNode
 
-function setActiveGameMode(node) {
+function setActiveGameMode(quizBtnNode, catNode) {
+  console.log('controller: quizBtnNode, catNode', quizBtnNode, catNode)
   if (activeGameMode) {
     activeGameMode.classList.remove('active')
   }
-  activeGameMode = node
+  activeGameMode = quizBtnNode
   activeGameMode.classList.add('active')
+
+  if (activeCat) {
+    activeCat.classList.remove('active')
+  }
+  activeCat = catNode
+  activeCat.classList.add('active')
 }
 
 export default {
@@ -28,48 +37,42 @@ export default {
     catDropdown.forEach((el, id) => {
       // console.log(el)
       if (el.firstChild.id === params.category) {
-        console.log('catdropdown same cat', el.firstChild)
+        // console.log('catdropdown same cat', el.firstChild)
         catDropdownNode = el.firstChild
       }
     })
-
+    // get data from model
     const authors = Model.getAuthor(params.category)
-    console.log(authors)
+    console.log('authorRoute authors', authors)
+    // pass data to view
     Author.setData(authors, params.category)
     Author.render()
-    // TODO
-    /**
-     * specify how many authors to load?
-     *
-     */
-    setActiveGameMode(menuAuthorQuiz, params.category)
-    setActiveGameMode(catDropdownNode)
+
+    setActiveGameMode(menuAuthorQuiz, catDropdownNode)
   },
 
   async pictureRoute(params) {
-    console.log('picure route')
+    console.log('Picure Route')
     menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
-    console.log('menuPictureQuiz', menuPictureQuiz)
+    // console.log('menuPictureQuiz', menuPictureQuiz)
     // set active cat
 
     catDropdown = document.querySelectorAll('div.main-nav > ul > li.nav-item.dropdown > ul > li')
     catDropdown.forEach((el, id) => {
       // console.log(el)
       if (el.firstChild.id === params.category) {
-        console.log('catdropdown same cat', el.firstChild)
+        // console.log('catdropdown same cat', el.firstChild)
         catDropdownNode = el.firstChild
       }
     })
+    // get data from model
     const pictures = Model.getImg(params.category)
     console.log('pictureRoute pictures:', pictures)
-    // TODO
-    /**
-     * specify how many pictures to load ?
-     *
-     */
+    // pass data to view
+    Picture.setData(pictures, params.category)
+    Picture.render()
 
-    setActiveGameMode(menuPictureQuiz)
-    setActiveGameMode(catDropdownNode)
+    setActiveGameMode(menuPictureQuiz, catDropdownNode)
   },
   async mainRoute() {},
 }

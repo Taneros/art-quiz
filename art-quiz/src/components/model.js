@@ -6,7 +6,6 @@ let data
 export default {
   async loadJSON() {
     const res = await fetch('./components/app/data.json')
-
     data = await res.json()
     // console.log('data', data)
     return data
@@ -29,11 +28,16 @@ export default {
     })
     return authorArr
   },
-  getImg() {
+  getImg(cat) {
     const imgArr = []
+    // data.forEach((el, idx) => {
+    //   imgArr.push(el.imageNum)
+    // })
     data.forEach((el, idx) => {
-      imgArr.push(el.imageNum)
+      if (el.category === cat) imgArr.push(el)
+      // console.log(el.author)
     })
+
     return imgArr
   },
 }

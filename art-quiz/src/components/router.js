@@ -8,7 +8,7 @@ function getRoute() {
 }
 
 function handleHash() {
-  if (location.hash.slice(1).split('/').length === 1) location.hash += `/avant-garde`
+  // handleSlash()
   const { quiz_type, params } = getRoute()
   console.log('router working on hash ->', quiz_type, params)
   if (quiz_type) {
@@ -21,6 +21,7 @@ function handleHash() {
 }
 
 function handleSlash() {
+  // if (location.hash.slice(1).split('/').length === 1) location.hash += `/avant-garde`
   const cats = document.querySelector('div.main-nav > ul > li.nav-item.dropdown > ul')
   // console.log('cats:', cats)
   cats.addEventListener('click', (e) => {
@@ -31,17 +32,20 @@ function handleSlash() {
     // console.log('path', path)
     const [hash, cat] = location.hash.slice(1).split('/')
     location.hash = `#${hash}/${catInnerHTML}`
-    handleHash()
   })
+  handleHash()
 }
 
 export default {
   init() {
-    addEventListener('hashchange', handleHash)
+    addEventListener('hashchange', () => {
+      // handleHash()
+      handleSlash()
+    })
     // console.log('handleHash() ->', handleHash())
     // const { routeName, params } = handleHash()
     // console.log('routeName, params ->', routeName, params)
-    handleSlash()
+    // handleSlash()
   },
 }
 

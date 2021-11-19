@@ -41,14 +41,14 @@ export default {
   picture: `
   <div class="picture-quiz">
   <div class="container">
-    <h2 class="picture-quiz__text text">Какая картина принадлежит {{author}}?</h2>
+    <h2 class="picture-quiz__text text">Какую картину написал {{author}}?</h2>
     <div class="container">
       <div id="prev" class="btn btn-info"><i class="fa fa-angle-left"></i></div>
       <div class="picture-quiz__picture">
-        <div class="picture-quiz__picture__item" id='1' style="background-image: url('./images/img/{{1}}.jpg');"></div>
-        <div class="picture-quiz__picture__item" id='2' style="background-image: url('./images/img/{{2}}.jpg');"></div>
-        <div class="picture-quiz__picture__item" id='3' style="background-image: url('./images/img/{{3}}.jpg');"></div>
-        <div class="picture-quiz__picture__item" id='4' style="background-image: url('./images/img/{{4}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='1' style="background-image: url('./images/img/{{answer-1}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='2' style="background-image: url('./images/img/{{answer-2}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='3' style="background-image: url('./images/img/{{answer-3}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='4' style="background-image: url('./images/img/{{answer-4}}.jpg');"></div>
       </div>
       <div id="next" class="btn btn-info"><i class="fa fa-angle-right"></i></div>
     </div>

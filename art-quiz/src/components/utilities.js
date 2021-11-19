@@ -10,18 +10,20 @@ export default {
     }
     return a
   },
-  getRndItem(items) {
+  getRndItem(items, quiz_type) {
     const itemsLength = Object.keys(items).length
     const random = Math.floor(Math.random() * itemsLength)
-    // console.log(random)
-    return items[random].author
+    if (quiz_type === 'picture-quiz') {
+      return items[random].imageNum
+    } else {
+      return items[random].author
+    }
   },
-  generateUnique(params, items) {
+  generateUnique(params, items, quiz_type) {
     let mySet = new Set().add(params)
     while (mySet.size < 4) {
-      mySet.add(this.getRndItem(items))
+      mySet.add(this.getRndItem(items, quiz_type))
     }
-    // console.log(mySet)
     return this.shuffleArr(Array.from(mySet))
   },
 

@@ -26,7 +26,7 @@ function currentAuthor(params) {
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
-    console.log('newItems, params_cat:', newItems, params_cat)
+    // console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     category = params_cat
     items = Settings.getLocalStorage(`items_${category}`) || []
