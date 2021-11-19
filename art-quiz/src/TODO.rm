@@ -1,0 +1,32 @@
+fix categories highlight
+
+final score for category overlay
+
+add score button to nav menu
+
+
+!try build
+
+ * read data from storage asynchronously
+ *
+ * rename author.js vars according to new nameing 
+
+
+main route
+  - carousel
+  - start game button
+  - remove author and picture quiz buttons
+
+
+settings:
+  - sound
+  - erase all progress
+
+
+pagination:
+  - move down
+
+
+picture-quiz
+  - outiline thiker
+

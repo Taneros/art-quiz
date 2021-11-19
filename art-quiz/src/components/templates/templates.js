@@ -38,5 +38,38 @@ export default {
   </div>
 </div>
   `,
-  picture: '',
+  picture: `
+  <div class="picture-quiz">
+  <div class="container">
+    <h2 class="picture-quiz__text text">Какую картину написал {{author}}?</h2>
+    <div class="container">
+      <div id="prev" class="btn btn-info"><i class="fa fa-angle-left"></i></div>
+      <div class="picture-quiz__picture">
+        <div class="picture-quiz__picture__item answers__answer" id='1' style="background-image: url('./images/img/{{answer-1}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='2' style="background-image: url('./images/img/{{answer-2}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='3' style="background-image: url('./images/img/{{answer-3}}.jpg');"></div>
+        <div class="picture-quiz__picture__item answers__answer" id='4' style="background-image: url('./images/img/{{answer-4}}.jpg');"></div>
+      </div>
+      <div id="next" class="btn btn-info"><i class="fa fa-angle-right"></i></div>
+    </div>
+    <div class="pagination">
+      <nav aria-label="Page navigation">
+        <ul class="pagination pagination-sm">
+          </li>
+          <li class="page-item"><a class="page-link" id="pg_1">1</a></li>
+          <li class="page-item"><a class="page-link" id="pg_2">2</a></li>
+          <li class="page-item"><a class="page-link" id="pg_3">3</a></li>
+          <li class="page-item"><a class="page-link" id="pg_4">4</a></li>
+          <li class="page-item"><a class="page-link" id="pg_5">5</a></li>
+          <li class="page-item"><a class="page-link" id="pg_6">6</a></li>
+          <li class="page-item"><a class="page-link" id="pg_7">7</a></li>
+          <li class="page-item"><a class="page-link" id="pg_8">8</a></li>
+          <li class="page-item"><a class="page-link" id="pg_9">9</a></li>
+          <li class="page-item"><a class="page-link" id="pg_10">10</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  `,
 }
