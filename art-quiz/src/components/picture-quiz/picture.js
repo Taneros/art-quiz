@@ -22,24 +22,30 @@ function getCurrentQuestionSet(params) {
   return questionPack[params]
 }
 
+function makeRundomPack(params) {}
+
 function checkDoublicates(newItems) {
   let noDublicates = newItems.reduce((arr, item) => {
     const removed = arr.filter((i) => i['author'] !== item['author'])
     return [...removed, item]
   }, [])
-  if (noDublicates.length < 11) {
-    console.log('less than 10 getting more', Model.getRandom())
+  if (noDublicates.length < 10) {
+    console.log('less than 10 getting more')
     noDublicates.push(Model.getRandom())
     console.log(noDublicates)
     checkDoublicates(noDublicates)
     // checkDoubles(noDublicates.push(Model.getRandom()))
-  } else return noDublicates
+  }
+  return noDublicates
 }
 
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
-    console.log('no doubles', checkDoublicates(newItems))
+    // console.log('no doubles', checkDoublicates(newItems))
+    // newItems = checkDoublicates(newItems)
+    // console.log('new', checkDoublicates(newItems))
+    newItems = checkDoublicates(newItems)
     console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     mainMenuNode = document.getElementsByClassName('main-menu')
@@ -62,6 +68,13 @@ export default {
         const singleQuestionData = {}
         // grab an image
         singleQuestionData.author = el.author
+
+        //TODO
+        /**
+         *redo image generation
+         get an generate pack of 10 generateUnique
+         get random from model
+         * */
         // console.log('correct image', el.imageNum)
         answers[`${el.author}`] = el.imageNum
         singleQuestionData.correctAnswer = el.imageNum
