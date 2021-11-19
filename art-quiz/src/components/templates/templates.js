@@ -69,7 +69,34 @@ export default {
         </ul>
       </nav>
     </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="quiz-modal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">{{author}} написал эту картину.</h4>
+            <button id="quiz-modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="modal-body__answer-image" style="background-image: url('./images/img/{{correctAnswer}}.jpg');"></div>
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button id="quiz-modal-prev-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Предыдущий</button>
+            <button id="quiz-modal-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующий</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+  `,
+  quiz_menu: `
+  <div class="container">
+  <a href="#author" data-role="menu-author" class="main-menu__author button btn btn-info">По Автору</a>
+  <a href="#picture" data-role="menu-pictures" class="main-menu__pictures button btn btn-info">По Произведению</a>
+  </div>
   `,
 }

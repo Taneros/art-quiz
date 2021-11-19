@@ -57,13 +57,11 @@ export class App {
           </div>
         </div>
         <div id="results"></div>
-        <div class="author-quiz">
-      </div>
       <footer></footer>
     </div>
     `
     ;(async () => {
-      console.log('results in DOM', !!document.getElementById('results'))
+      // console.log('results in DOM', !!document.getElementById('results'))
       try {
         await Model.loadJSON()
         Router.init()

@@ -1,11 +1,14 @@
 import View from '../view.js'
 import Settings from '../settings.js'
 import Utils from '../utilities.js'
+import Model from '../model.js'
+// import templates from '../templates/templates.js'
 
 // let { quiz_type, params } = Utils.getRoute()
 // console.log('params ->', params.category)
 let category
 let resultsNode
+let mainMenuNode
 let prevBtn
 let nextBtn
 let answerBtns
@@ -19,11 +22,27 @@ function getCurrentQuestionSet(params) {
   return questionPack[params]
 }
 
+function checkDoublicates(newItems) {
+  let noDublicates = newItems.reduce((arr, item) => {
+    const removed = arr.filter((i) => i['author'] !== item['author'])
+    return [...removed, item]
+  }, [])
+  if (noDublicates.length < 11) {
+    console.log('less than 10 getting more', Model.getRandom())
+    noDublicates.push(Model.getRandom())
+    console.log(noDublicates)
+    checkDoublicates(noDublicates)
+    // checkDoubles(noDublicates.push(Model.getRandom()))
+  } else return noDublicates
+}
+
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
-    // console.log('newItems, params_cat:', newItems, params_cat)
+    console.log('no doubles', checkDoublicates(newItems))
+    console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
+    mainMenuNode = document.getElementsByClassName('main-menu')
     category = params_cat
     items = Settings.getLocalStorage(`items_pic_${category}`) || []
     questionPack = Settings.getLocalStorage(`questionPack_pic_${category}`) || []
@@ -45,6 +64,7 @@ export default {
         singleQuestionData.author = el.author
         // console.log('correct image', el.imageNum)
         answers[`${el.author}`] = el.imageNum
+        singleQuestionData.correctAnswer = el.imageNum
         // generate 3 extra
         Utils.generateUnique(el.imageNum, items, 'picture-quiz').forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
@@ -58,14 +78,56 @@ export default {
 
   /******************* R E N D E R *******************/
 
-  async render() {
+  render() {
     // setting current author (-1 to adjust for array idx)
     console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // console.log('answers:', answers)
     // render page
     resultsNode.innerHTML = View.render('picture', getCurrentQuestionSet(currentQuestionCardNum - 1))
 
-    console.log(`score_pic_${category}`)
+    //TODO
+    /**
+  make search correct function and reuse for answer chack and overlay
+  * 
+  remove my from variables
+  * 
+  */
+
+    let myQuizModalBody = document.querySelector('.modal-body')
+    const myQuizModal = document.getElementById('quiz-modal')
+    const myQuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
+    const myQuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
+    const myQuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
+    const activateQuizModal = new bootstrap.Modal(myQuizModal)
+
+    myQuizModalCloseBtn.addEventListener('click', () => {
+      this.render()
+    })
+
+    myQuizModalPrevBtn.addEventListener('click', () => {
+      let event = new Event('click')
+      prevBtn.dispatchEvent(event)
+    })
+
+    // modal prev btn
+    if (currentQuestionCardNum === 1) {
+      myQuizModalPrevBtn.classList.add('disabled')
+    } else {
+      myQuizModalPrevBtn.classList.remove('disabled')
+    }
+
+    // modal next btn
+    myQuizModalNextBtn.addEventListener('click', () => {
+      let event = new Event('click')
+      nextBtn.dispatchEvent(event)
+    })
+    if (currentQuestionCardNum === 10) {
+      myQuizModalNextBtn.classList.add('disabled')
+    } else {
+      myQuizModalNextBtn.classList.remove('disabled')
+    }
+
+    // console.log(`score_pic_${category}`)
     score = Settings.getLocalStorage(`score_pic_${category}`) || Utils.resetScore()
     // console.log('render-score:', score)
 
@@ -111,20 +173,23 @@ export default {
         // condition for more than two pictures in questions of the same author in set
         if (filteredQs.length === 1) {
           if (currentCardImg === filteredQs[0].imageNum) {
+            myQuizModalBody.classList.add('correct')
             el.classList.add('correct', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 1
           } else {
+            myQuizModalBody.classList.add('notcorrect')
             el.classList.add('notcorrect', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 0
           }
         } else {
-          console.log('more than two answers!', filteredQs)
+          // console.log('more than two answers!', filteredQs)
           let guessCorrectFromTwo = false
           filteredQs.forEach((fq) => {
-            console.log('currentCardImg, fq.imageNum', currentCardImg, fq.imageNum)
+            // console.log('currentCardImg, fq.imageNum', currentCardImg, fq.imageNum)
             if (currentCardImg === fq.imageNum) {
+              myQuizModalBody.classList.add('correct')
               el.classList.add('correct', 'outline')
               answerResult.el_id = el.id
               answerResult.correct = 1
@@ -132,6 +197,7 @@ export default {
             }
           })
           if (!guessCorrectFromTwo) {
+            myQuizModalBody.classList.add('notcorrect')
             el.classList.add('notcorrect', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 0
@@ -142,16 +208,17 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_pic_${category}`, score)
         }
-        this.render()
+        //
+        activateQuizModal.show()
       })
     })
     // console.log(answerBtns)
+
     // event listeners for prev next buttons
     prevBtn.addEventListener('click', () => {
       if (currentQuestionCardNum < 11 && currentQuestionCardNum > 1) {
         currentQuestionCardNum--
         // console.log(currentQuestionCardNum)
-        // take next question from the pack
         this.render()
       }
     })

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +15,7 @@
     <!-- <script type="module" src="./index.js" defer></script> -->
     <title>Art Quiz</title>
   </head>
+
   <body>
     <div class="application">
       <div class="container">
@@ -58,10 +60,10 @@
               <div class="container">
                 <div id="prev" class="btn btn-info"><i class="fa fa-angle-left"></i></div>
                 <div class="picture-quiz__picture">
-                  <div class="picture-quiz__picture__item correct outline" id='1' style = "background-image: url('./images/img/10.jpg');"></div>
-                  <div class="picture-quiz__picture__item" id='2' style = "background-image: url('./images/img/11.jpg');"></div>
-                  <div class="picture-quiz__picture__item" id='3' style = "background-image: url('./images/img/12.jpg');"></div>
-                  <div class="picture-quiz__picture__item" id='4' style = "background-image: url('./images/img/13.jpg');"></div>
+                  <div class="picture-quiz__picture__item correct outline" id='1' style="background-image: url('./images/img/10.jpg');"></div>
+                  <div class="picture-quiz__picture__item" id='2' style="background-image: url('./images/img/11.jpg');"></div>
+                  <div class="picture-quiz__picture__item" id='3' style="background-image: url('./images/img/12.jpg');"></div>
+                  <div class="picture-quiz__picture__item" id='4' style="background-image: url('./images/img/13.jpg');"></div>
                 </div>
                 <div id="next" class="btn btn-info"><i class="fa fa-angle-right"></i></div>
               </div>
@@ -69,27 +71,43 @@
                 <nav aria-label="Page navigation">
                   <ul class="pagination pagination-sm">
                     </li>
-                    <li class="page-item"><a  class="page-link" id="pg_1">1</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_2">2</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_3">3</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_4">4</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_5">5</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_6">6</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_7">7</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_8">8</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_9">9</a></li>
-                    <li class="page-item"><a  class="page-link" id="pg_10">10</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_1">1</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_2">2</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_3">3</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_4">4</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_5">5</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_6">6</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_7">7</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_8">8</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_9">9</a></li>
+                    <li class="page-item"><a class="page-link" id="pg_10">10</a></li>
                   </ul>
                 </nav>
               </div>
-              <div class="answers">
-                <div class="container">
-                  <!-- <ul class="answers wraper list-group">
-                    <li class="answers__answer list-group-item active" id="1">Author 1</li>
-                    <li class="answers__answer list-group-item" id="2">Author 2</li>
-                    <li class="answers__answer list-group-item" id="3">Author 3</li>
-                    <li class="answers__answer list-group-item" id="4">Author 4</li>
-                  </ul> -->
+              <!-- The Modal -->
+              <div class="modal fade" id="quiz-modal">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">{{author}} написал эту картину.</h4>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body correct">
+                      <div class="modal-body__answer-image" style="background-image: url('./images/img/10.jpg');"></div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button id="quiz-modal-prev-btn" type="button" class="btn btn-info disabled" data-bs-dismiss="modal">Предыдущий</button>
+                      <button id="quiz-modal-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующий</button>
+                    </div>
+                    <script>
+                      const myQuizModal=document.getElementById('quiz-modal')
+                      const activateQuizModal=new bootstrap.Modal(myQuizModal)
+                      activateQuizModal.show()
+                    </script>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,6 +117,5 @@
       <footer></footer>
     </div>
   </body>
+
 </html>
-
-

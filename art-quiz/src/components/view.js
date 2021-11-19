@@ -9,8 +9,8 @@ import Templates from './templates/templates'
  */
 
 export default {
-  render(templateName, templates) {
-    console.log('\nview', templateName, templates)
+  render(templateName, templates, correctAnswer) {
+    // console.log('\nview', templateName, templates)
     let content = Templates[templateName]
 
     // TODO
@@ -20,7 +20,7 @@ export default {
 
     // get template names
     let templateItems = content.match(/[^{\}]+(?=})/gm) || []
-    // console.log(templateItems)
+    console.log('templateItems', templateItems)
 
     if (templateItems.length) {
       templateItems.forEach((item, idx) => {

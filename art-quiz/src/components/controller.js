@@ -14,7 +14,7 @@ let catDropdown
 let catDropdownNode
 
 function setActiveGameMode(quizBtnNode, catNode) {
-  console.log('controller: quizBtnNode, catNode', quizBtnNode, catNode)
+  // console.log('controller: quizBtnNode, catNode', quizBtnNode, catNode)
   if (activeGameMode) {
     activeGameMode.classList.remove('active')
   }
