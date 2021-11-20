@@ -40,4 +40,7 @@ export default {
 
     return imgArr
   },
+  getRandom() {
+    return data[Math.floor(Math.random() * data.length)]
+  },
 }
