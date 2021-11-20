@@ -139,10 +139,10 @@ export default {
     } else {
       myQuizModalNextBtn.classList.remove('disabled')
     }
-
-    // console.log(`score_pic_${category}`)
-    score = Settings.getLocalStorage(`score_pic_${category}`) || Utils.resetScore()
-    // console.log('render-score:', score)
+    // not needed?
+    // // console.log(`score_pic_${category}`)
+    // score = Settings.getLocalStorage(`score_pic_${category}`) || Utils.resetScore()
+    // // console.log('render-score:', score)
 
     score.forEach((el, idx) => {
       // console.log('el.correct', el.correct)

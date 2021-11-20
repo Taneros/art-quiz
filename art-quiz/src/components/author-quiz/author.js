@@ -66,6 +66,7 @@ export default {
         // grab an image
         singleQuestionData.img = el.imageNum
         // console.log('correct author', el.author)
+        singleQuestionData.correctAnswer = el.author
         // generate 3 extra
         Utils.generateUnique(el.author, items).forEach((el, idx) => {
           singleQuestionData[`answer-${idx + 1}`] = el
@@ -81,19 +82,51 @@ export default {
 
   render() {
     // setting current author (-1 to adjust for array idx)
-    console.log('render:', getCurrentQuestionSet(currentQuestionCardNum - 1))
+    console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // render page
     resultsNode.innerHTML = View.render('author', getCurrentQuestionSet(currentQuestionCardNum - 1))
-    console.log(`score_auth_${category}`)
-    score = Settings.getLocalStorage(`score_auth_${category}`) || Utils.resetScore()
-    console.log('render-score:', score)
+    // console.log(`score_auth_${category}`)
+    // score = Settings.getLocalStorage(`score_auth_${category}`) || Utils.resetScore()
+    // console.log('render-score:', score)
 
     // TODO
     /**
      *
      */
 
-    // render pagination put in separate function?
+    let myQuizModalBody = document.querySelector('.modal-body')
+    const myQuizModal = document.getElementById('quiz-modal')
+    const myQuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
+    const myQuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
+    const myQuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
+    const activateQuizModal = new bootstrap.Modal(myQuizModal)
+
+    myQuizModalCloseBtn.addEventListener('click', () => {
+      this.render()
+    })
+
+    myQuizModalPrevBtn.addEventListener('click', () => {
+      let event = new Event('click')
+      prevBtn.dispatchEvent(event)
+    })
+
+    // modal prev btn
+    if (currentQuestionCardNum === 1) {
+      myQuizModalPrevBtn.classList.add('disabled')
+    } else {
+      myQuizModalPrevBtn.classList.remove('disabled')
+    }
+
+    // modal next btn
+    myQuizModalNextBtn.addEventListener('click', () => {
+      let event = new Event('click')
+      nextBtn.dispatchEvent(event)
+    })
+    if (currentQuestionCardNum === 10) {
+      myQuizModalNextBtn.classList.add('disabled')
+    } else {
+      myQuizModalNextBtn.classList.remove('disabled')
+    }
 
     score.forEach((el, idx) => {
       // console.log('el.correct', el.correct)
@@ -128,10 +161,12 @@ export default {
         // console.log(el.innerHTML)
         if (el.innerHTML === items.filter((el) => el.imageNum === getCurrentQuestionSet(currentQuestionCardNum - 1).img)[0].author) {
           // console.log('correct!')
+          myQuizModalBody.classList.add('correct')
           el.classList.add('correct')
           answerResult.el_id = el.id
           answerResult.correct = 1
         } else {
+          myQuizModalBody.classList.add('notcorrect')
           el.classList.add('notcorrect')
           answerResult.el_id = el.id
           answerResult.correct = 0
@@ -141,7 +176,8 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_auth_${category}`, score)
         }
-        this.render()
+        activateQuizModal.show()
+        // this.render()
       })
     })
     // console.log(answerBtns)

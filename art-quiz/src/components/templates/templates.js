@@ -41,12 +41,12 @@ export default {
         <div class="modal-content">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">{{author}} написал эту картину.</h4>
+            <h4 class="modal-title">{{correctAnswer}} написал эту картину.</h4>
             <button id="quiz-modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="modal-body__answer-image" style="background-image: url('./images/img/{{correctAnswer}}.jpg');"></div>
+            <div class="modal-body__answer-image" style="background-image: url('./images/img/{{img}}.jpg');"></div>
           </div>
           <!-- Modal footer -->
           <div class="modal-footer">
