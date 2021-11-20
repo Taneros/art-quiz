@@ -120,4 +120,38 @@ export default {
   <a href="#picture" data-role="menu-pictures" class="main-menu__pictures button btn btn-info">По Произведению</a>
   </div>
   `,
+  author_quiz_cats: `
+  <div class="author-quiz-cat container">
+  <div class="author-quiz-cat card-group">
+    <div class="card" id="avant-garde-m">
+      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Авангард</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="expressionism">
+      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Экспрессионизм</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="impressionism">
+      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Ипрессионизм</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="landscape">
+      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Пейзаж</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+  `,
 }
