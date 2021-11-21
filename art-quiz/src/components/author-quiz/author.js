@@ -86,12 +86,29 @@ export default {
     // render page
     resultsNode.innerHTML = View.render('author', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // console.log(`score_auth_${category}`)
-    // score = Settings.getLocalStorage(`score_auth_${category}`) || Utils.resetScore()
-    // console.log('render-score:', score)
 
     // TODO
     /**
      *
+     * categories dropdown implement
+     * 
+     *       // get score tag
+      const cardScoreWin = card.querySelector('span.badge.bg-success')
+      const cardScoreLoss = card.querySelector('span.badge.bg-danger')
+      console.log('success', cardScoreWin)
+      // count wins losses
+      const currectCardScore = { wins: 0, losses: 0, nulls: 0 }
+      cardScoreStorage.forEach((score, idx) => {
+        const correct = score.correct
+        if (correct) currectCardScore.wins += 1
+        else if (correct === null) currectCardScore.nulls += 1
+        else currectCardScore.losses += 1
+      })
+      // render score
+      cardScoreWin.innerHTML = `${currectCardScore.wins}`
+      cardScoreLoss.innerHTML = `${currectCardScore.losses}`
+      
+     * 
      */
 
     let myQuizModalBody = document.querySelector('.modal-body')

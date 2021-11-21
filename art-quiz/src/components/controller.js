@@ -1,6 +1,7 @@
 import Model from './model.js'
 import Author from './author-quiz/author.js'
 import Picture from './picture-quiz/picture.js'
+import AuthorQuizCats from './author-quiz/author-quiz-cats.js'
 
 let activeGameMode
 let activeCat
@@ -21,17 +22,19 @@ function setActiveGameMode(quizBtnNode, catNode) {
   activeGameMode = quizBtnNode
   activeGameMode.classList.add('active')
 
-  if (activeCat) {
-    activeCat.classList.remove('active')
+  if (catNode) {
+    if (activeCat) {
+      activeCat.classList.remove('active')
+    }
+    activeCat = catNode
+    activeCat.classList.add('active')
   }
-  activeCat = catNode
-  activeCat.classList.add('active')
 }
 
 export default {
   async authorRoute(params) {
     // console.log(params.category)
-    menuAuthorQuiz = document.querySelector('[data-role="menu-author"]')
+    // menuAuthorQuiz = document.querySelector('[data-role="menu-author"]')
     // set active cat
     catDropdown = document.querySelectorAll('div.main-nav > ul > li.nav-item.dropdown > ul > li')
     catDropdown.forEach((el, id) => {
@@ -53,7 +56,7 @@ export default {
 
   async pictureRoute(params) {
     console.log('Picure Route')
-    menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
+    // menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
     // console.log('menuPictureQuiz', menuPictureQuiz)
     // set active cat
 
@@ -74,5 +77,19 @@ export default {
 
     setActiveGameMode(menuPictureQuiz, catDropdownNode)
   },
-  async mainRoute() {},
+  async catsRoute(quiz_type, params) {
+    console.log('catsRoute')
+    menuAuthorQuiz = document.querySelector('[data-role="menu-author"]')
+    menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
+    AuthorQuizCats.setData(quiz_type)
+    AuthorQuizCats.render()
+
+    if (quiz_type === 'author') {
+      setActiveGameMode(menuAuthorQuiz)
+      menuPictureQuiz.classList.add('visually-hidden')
+    } else {
+      setActiveGameMode(menuPictureQuiz)
+      menuAuthorQuiz.classList.add('visually-hidden')
+    }
+  },
 }

@@ -130,21 +130,21 @@ export default {
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
-    <div class="card" id="expressionism">
+    <div class="card" id="expressionism-m">
       <img src="./images/img/1.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Экспрессионизм</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
-    <div class="card" id="impressionism">
+    <div class="card" id="impressionism-m">
       <img src="./images/img/1.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Ипрессионизм</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
-    <div class="card" id="landscape">
+    <div class="card" id="landscape-m">
       <img src="./images/img/1.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Пейзаж</h5>

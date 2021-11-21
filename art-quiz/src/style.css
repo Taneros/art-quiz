@@ -281,3 +281,8 @@ https://getbootstrap.com/docs/5.0/components/navs-tabs/
 .author-quiz-cat .card-title {
   text-align: center;
 }
+
+.card-text {
+  display: flex;
+  justify-content: center;
+}
