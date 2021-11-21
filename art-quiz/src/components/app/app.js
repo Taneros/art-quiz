@@ -33,18 +33,18 @@ export class App {
           <li class="nav-item dropdown visually-hidden">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Категории</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" id="avant-garde">Авангард</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="expressionism">Экспрессионизм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="impressionism">Ипрессионизм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="landscape">Пейзаж</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="marine">Морской пейзаж</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="painting">Живопись</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="portrait">Портрет</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="realism">Реализм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="religion">Религия</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="renaissance">Ренесанс</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="romanticism">Романтизм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
-              <li><a class="dropdown-item" id="surrealism">Сюрреализм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
+              <li><a class="dropdown-item" id="avant-garde">Авангард</a></li>
+              <li><a class="dropdown-item" id="expressionism">Экспрессионизм</a></li>
+              <li><a class="dropdown-item" id="impressionism">Ипрессионизм</a></li>
+              <li><a class="dropdown-item" id="landscape">Пейзаж</a></li>
+              <li><a class="dropdown-item" id="marine">Морской пейзаж</a></li>
+              <li><a class="dropdown-item" id="painting">Живопись</a></li>
+              <li><a class="dropdown-item" id="portrait">Портрет</a></li>
+              <li><a class="dropdown-item" id="realism">Реализм</a></li>
+              <li><a class="dropdown-item" id="religion">Религия</a></li>
+              <li><a class="dropdown-item" id="renaissance">Ренесанс</a></li>
+              <li><a class="dropdown-item" id="romanticism">Романтизм</a></li>
+              <li><a class="dropdown-item" id="surrealism">Сюрреализм</a></li>
             </ul>
           </li>
           <li class="nav-item">
