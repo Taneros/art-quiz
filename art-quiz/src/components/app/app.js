@@ -12,13 +12,17 @@ export class App {
 
   init() {
     console.log('app started')
-    // this.container = document.createElement('div')
-    // this.container.classList.add('application')
-    // document.body.appendChild(this.container)
-    // this.header = document.createElement('h1')
-    // this.header.classList.add('visually-hidden')
-    // this.header.textContent = 'Art Quiz'
-    // document.getElementsByClassName('application')[0].appendChild(this.header)
+    // TODO
+    /**
+     * add header element place there nav links
+     *
+     * body container
+     * header
+     * main
+     *  - application
+     * footer
+     */
+
     document.body.innerHTML = `
     <div class="application">
       <div class="main-nav">
@@ -57,8 +61,8 @@ export class App {
           </div>
         </div>
         <div id="results"></div>
-      <footer></footer>
     </div>
+    <footer></footer>
     `
     ;(async () => {
       // console.log('results in DOM', !!document.getElementById('results'))

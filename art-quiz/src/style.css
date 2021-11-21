@@ -12,13 +12,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
   width: 100%;
-  /* margin: 0 1rem; */
 }
 
 .application .container {
-  height: 90%;
+  height: 100%;
   width: 100%;
   /* max-width: calc(80vw); */
   margin: 0 auto;
