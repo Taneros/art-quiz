@@ -1,9 +1,11 @@
 import Controller from './controller.js'
 import Utils from './utilities.js'
 
+let catsDropdownMain
+
 function getRoute() {
   const path = location.hash ? location.hash.slice(1) : ''
-  const [quiz_type, category = 'avant-garde'] = path.split('/')
+  const [quiz_type, category = 'categories'] = path.split('/')
   return { quiz_type, params: { category } }
 }
 
@@ -11,12 +13,16 @@ function handleHash() {
   // handleSlash()
   const { quiz_type, params } = getRoute()
   console.log('router working on hash ->', quiz_type, params)
-  if (quiz_type) {
+  catsDropdownMain = document.querySelector('.nav-item.dropdown')
+  if (quiz_type && params.category !== 'categories') {
+    catsDropdownMain.classList.remove('visually-hidden')
+    console.log('catsDropdownMain', catsDropdownMain)
     const routeName = quiz_type + 'Route'
     Controller[routeName](params)
   } else {
-    const routeName = 'mainRoute'
-    Controller[routeName](params)
+    const routeName = 'catsRoute'
+    catsDropdownMain.classList.add('visually-hidden')
+    Controller[routeName](quiz_type, params)
   }
 }
 
@@ -24,6 +30,7 @@ function handleSlash() {
   // if (location.hash.slice(1).split('/').length === 1) location.hash += `/avant-garde`
   const cats = document.querySelector('div.main-nav > ul > li.nav-item.dropdown > ul')
   // console.log('cats:', cats)
+  // add event listener to drop-down menu
   cats.addEventListener('click', (e) => {
     // console.log(e.target)
     const catInnerHTML = e.target.id
