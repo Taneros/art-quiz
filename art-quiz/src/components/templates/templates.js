@@ -124,30 +124,86 @@ export default {
   <div class="author-quiz-cat container">
   <div class="author-quiz-cat card-group">
     <div class="card" id="avant-garde-m">
-      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <img src="./images/img/{{img1}}.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Авангард</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
     <div class="card" id="expressionism-m">
-      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <img src="./images/img/{{img2}}.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Экспрессионизм</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
     <div class="card" id="impressionism-m">
-      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <img src="./images/img/{{img3}}.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Ипрессионизм</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>
     <div class="card" id="landscape-m">
-      <img src="./images/img/1.jpg" class="card-img-top" alt="">
+      <img src="./images/img/{{img4}}.jpg" class="card-img-top" alt="">
       <div class="card-body">
         <h5 class="card-title fs-6">Пейзаж</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="marine-m">
+      <img src="./images/img/{{img5}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Морской пейзаж</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="painting-m">
+      <img src="./images/img/{{img6}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Живопись</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="portrait-m">
+      <img src="./images/img/{{img7}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Портрет</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="realism-m">
+      <img src="./images/img/{{img8}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Реализм</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="religion-m">
+      <img src="./images/img/{{img9}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Религия</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="renaissance-m">
+      <img src="./images/img/{{img10}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Ренесанс</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="romanticism-m">
+      <img src="./images/img/{{img11}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Романтизм</h5>
+        <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
+      </div>
+    </div>
+    <div class="card" id="surrealism-m">
+      <img src="./images/img/{{img12}}.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <h5 class="card-title fs-6">Сюрреализм</h5>
         <p class="card-text"><small class="text-muted"><span class="badge bg-success">1</span> <span class="badge bg-danger">9</span></small></p>
       </div>
     </div>

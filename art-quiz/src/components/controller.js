@@ -59,7 +59,6 @@ export default {
     // menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
     // console.log('menuPictureQuiz', menuPictureQuiz)
     // set active cat
-
     catDropdown = document.querySelectorAll('div.main-nav > ul > li.nav-item.dropdown > ul > li')
     catDropdown.forEach((el, id) => {
       // console.log(el)

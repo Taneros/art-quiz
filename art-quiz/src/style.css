@@ -24,7 +24,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
 }
 
 .visually-hidden {
@@ -182,8 +181,15 @@ body {
   justify-content: space-between;
 }
 
-.dropdown-menu .badge {
-  margin-left: 10px;
+.dropdown-menu .badge:nth-child(2) {
+  margin-right: 5px;
+}
+
+.dropdown-menu > li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* 
