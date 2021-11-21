@@ -4,6 +4,7 @@ import Utils from '../utilities.js'
 import Model from '../model.js'
 
 let resultsNode
+let quizType
 const cardImg = {
   author: {
     img1: '41',
@@ -39,6 +40,8 @@ let currentCardSet
 //TODO
 /**
  *
+ * add card fade if all nulls (not played yet)
+ *
  */
 
 export default {
@@ -46,8 +49,13 @@ export default {
     // console.log('newItems, params_cat:', newItems, params_cat)
     console.log('quiz_type, params_cat:', quiz_type, params_cat)
     resultsNode = document.getElementById('results')
-    if (quiz_type === 'author') currentCardSet = cardImg.author
-    else currentCardSet = cardImg.picture
+    if (quiz_type === 'author') {
+      currentCardSet = cardImg.author
+      quizType = 'auth'
+    } else {
+      currentCardSet = cardImg.picture
+      quizType = 'pic'
+    }
   },
   render() {
     console.log('render cats author:')
@@ -63,7 +71,7 @@ export default {
       // console.log(card)
       const currentCat = card.id.slice(0, -2)
       // console.log(currentCat)
-      const cardScoreStorage = Settings.getLocalStorage(`score_auth_${currentCat}`) || Utils.resetScore()
+      const cardScoreStorage = Settings.getLocalStorage(`score_${quizType}_${currentCat}`) || Utils.resetScore()
 
       // get score tag
       const cardScoreWin = card.querySelector('span.badge.bg-success')
