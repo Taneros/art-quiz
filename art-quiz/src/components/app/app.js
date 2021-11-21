@@ -28,10 +28,10 @@ export class App {
       <div class="main-nav">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="">Home</a>
+            <a class="nav-link" aria-current="page" href="">В начало</a>
           </li>
           <li class="nav-item dropdown visually-hidden">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categories</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Категории</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" id="avant-garde">Авангард</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
               <li><a class="dropdown-item" id="expressionism">Экспрессионизм</a><span class="badge rounded-pill bg-danger">4</span><span class="badge rounded-pill bg-success">4</span></li>
@@ -48,7 +48,7 @@ export class App {
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Settings</a>
+            <a class="nav-link" href="#">Настройки</a>
           </li>
         </ul>
       </div>
