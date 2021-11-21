@@ -1,7 +1,7 @@
 import Model from './model.js'
 import Author from './author-quiz/author.js'
 import Picture from './picture-quiz/picture.js'
-import AuthorQuizCats from './author-quiz/author-quiz-cats.js'
+import QuizCats from './quiz-cats/quiz-cats.js'
 
 let activeGameMode
 let activeCat
@@ -80,8 +80,8 @@ export default {
     console.log('catsRoute')
     menuAuthorQuiz = document.querySelector('[data-role="menu-author"]')
     menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
-    AuthorQuizCats.setData(quiz_type)
-    AuthorQuizCats.render()
+    QuizCats.setData(quiz_type)
+    QuizCats.render()
 
     if (quiz_type === 'author') {
       setActiveGameMode(menuAuthorQuiz)
