@@ -42,6 +42,14 @@ let currentCardSet
  *
  * add card fade if all nulls (not played yet)
  *
+ * add style no border under pressed card
+ *
+ * make categories frop down visible again
+ *
+ * hide pictures quiz button
+ *
+ * make this js file universal
+ *
  */
 
 export default {
@@ -96,24 +104,5 @@ export default {
         location.hash = `#${hash}/${currentCat}`
       })
     })
-
-    //TODO
-    /**
-     *
-     *
-     *
-     * add event liteners to each card
-     *
-     * on click change hash -> router
-     *
-     * add style no border under pressed card
-     *
-     * make categories frop down visible again
-     *
-     * hide pictures quiz button
-     *
-     * make this js file universal
-     *
-     */
   },
 }
