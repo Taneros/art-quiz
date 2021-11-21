@@ -67,7 +67,7 @@ export default {
   },
   render() {
     console.log('render cats author:')
-    resultsNode.innerHTML = View.render('author_quiz_cats', currentCardSet)
+    resultsNode.innerHTML = View.render('quiz_cats', currentCardSet)
 
     const cards = document.getElementsByClassName('card')
     // console.log(cards)
@@ -76,27 +76,38 @@ export default {
     // console.log('categoriesMenuDropdown', categoriesMenuDropdown)
 
     Array.from(cards).forEach((card) => {
-      // console.log(card)
+      console.log(card)
       const currentCat = card.id.slice(0, -2)
-      // console.log(currentCat)
+      console.log(`score_${quizType}_${currentCat}`)
       const cardScoreStorage = Settings.getLocalStorage(`score_${quizType}_${currentCat}`) || Utils.resetScore()
-
       // get score tag
       const cardScoreWin = card.querySelector('span.badge.bg-success')
       const cardScoreLoss = card.querySelector('span.badge.bg-danger')
+      const cardOverlay = card.querySelector('.overlay')
+      console.log('cardOvelay', cardOverlay)
       // console.log('success', cardScoreWin)
       // count wins losses
-      const currectCardScore = { wins: 0, losses: 0, nulls: 0 }
+      const currentCardScore = { wins: 0, losses: 0, nulls: 0 }
+      console.log('cardScoreStorage', cardScoreStorage)
       cardScoreStorage.forEach((score, idx) => {
         const correct = score.correct
-        if (correct) currectCardScore.wins += 1
-        else if (correct === null) currectCardScore.nulls += 1
-        else currectCardScore.losses += 1
+        if (correct) {
+          console.log('correct!')
+          currentCardScore.wins += 1
+        } else if (correct === null) {
+          console.log('correct = null')
+          currentCardScore.nulls += 1
+        } else currentCardScore.losses += 1
       })
       // render score
-      cardScoreWin.innerHTML = `${currectCardScore.wins}`
-      cardScoreLoss.innerHTML = `${currectCardScore.losses}`
-
+      cardScoreWin.innerHTML = `${currentCardScore.wins}`
+      cardScoreLoss.innerHTML = `${currentCardScore.losses}`
+      // deactivate score if not played yet
+      if (currentCardScore.nulls === 10) {
+        cardScoreWin.classList.add('visually-hidden')
+        cardScoreLoss.classList.add('visually-hidden')
+        cardOverlay.classList.add('card-overlay-active')
+      }
       // add event listener
       card.addEventListener('click', (e) => {
         // console.log(e)

@@ -290,3 +290,16 @@ https://getbootstrap.com/docs/5.0/components/navs-tabs/
   display: flex;
   justify-content: center;
 }
+
+.card-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.card-overlay-active {
+  background-color: #000;
+  opacity: 0.5;
+}
