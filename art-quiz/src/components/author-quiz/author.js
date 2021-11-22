@@ -224,6 +224,7 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_auth_${category}`, score)
         }
+
         if (currentQuestionCardNum === 10) {
           QuizModal.addEventListener('hide.bs.modal', () => {
             this.render()

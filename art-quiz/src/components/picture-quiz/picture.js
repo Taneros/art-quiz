@@ -106,38 +106,62 @@ export default {
   * 
   */
 
-    let myQuizModalBody = document.querySelector('.modal-body')
-    const myQuizModal = document.getElementById('quiz-modal')
-    const myQuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
-    const myQuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
-    const myQuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
-    const activateQuizModal = new bootstrap.Modal(myQuizModal)
+    let QuizModalBody = document.querySelector('.modal-body')
+    const QuizModal = document.getElementById('quiz-modal')
+    const QuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
+    const QuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
+    const QuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
+    const activateQuizModal = new bootstrap.Modal(QuizModal)
 
-    myQuizModalCloseBtn.addEventListener('click', () => {
+    // Modal for round results scrore
+    const QuizRoundResult = document.getElementById('quiz-modal-round-score')
+    const activateQuizRoundModal = new bootstrap.Modal(QuizRoundResult, { backdrop: true })
+    const roundScoreWin = document.getElementById('win')
+    const roundScoreLoss = document.getElementById('loss')
+    const roundScoreHomeBtn = document.getElementById('quiz-modal-round-score-home-btn')
+    const roundScoreNextBtn = document.getElementById('quiz-modal-round-score-next-btn')
+    const roundScore = { wins: 0, losses: 0, nulls: 10 }
+
+    function showRoundScore() {
+      score.forEach((score) => {
+        const correct = score.correct
+        if (correct) {
+          roundScore.wins += 1
+        } else if (correct === 0) roundScore.losses += 1
+      })
+      console.log('roundScore', roundScore)
+      if (roundScore.wins + roundScore.losses === 10) {
+        roundScoreWin.innerHTML = `${roundScore.wins}`
+        roundScoreLoss.innerHTML = `${roundScore.losses}`
+        activateQuizRoundModal.show()
+      }
+    }
+
+    QuizModalCloseBtn.addEventListener('click', () => {
       this.render()
     })
 
-    myQuizModalPrevBtn.addEventListener('click', () => {
+    QuizModalPrevBtn.addEventListener('click', () => {
       let event = new Event('click')
       prevBtn.dispatchEvent(event)
     })
 
     // modal prev btn
     if (currentQuestionCardNum === 1) {
-      myQuizModalPrevBtn.classList.add('disabled')
+      QuizModalPrevBtn.classList.add('disabled')
     } else {
-      myQuizModalPrevBtn.classList.remove('disabled')
+      QuizModalPrevBtn.classList.remove('disabled')
     }
 
     // modal next btn
-    myQuizModalNextBtn.addEventListener('click', () => {
+    QuizModalNextBtn.addEventListener('click', () => {
       let event = new Event('click')
       nextBtn.dispatchEvent(event)
     })
     if (currentQuestionCardNum === 10) {
-      myQuizModalNextBtn.classList.add('disabled')
+      QuizModalNextBtn.classList.add('disabled')
     } else {
-      myQuizModalNextBtn.classList.remove('disabled')
+      QuizModalNextBtn.classList.remove('disabled')
     }
     // not needed?
     // // console.log(`score_pic_${category}`)
@@ -186,12 +210,12 @@ export default {
         // condition for more than two pictures in questions of the same author in set
         if (filteredQs.length === 1) {
           if (currentCardImg === filteredQs[0].imageNum) {
-            myQuizModalBody.classList.add('correct')
+            QuizModalBody.classList.add('correct')
             el.classList.add('correct', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 1
           } else {
-            myQuizModalBody.classList.add('notcorrect')
+            QuizModalBody.classList.add('notcorrect')
             el.classList.add('notcorrect', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 0
@@ -202,7 +226,7 @@ export default {
           filteredQs.forEach((fq) => {
             // console.log('currentCardImg, fq.imageNum', currentCardImg, fq.imageNum)
             if (currentCardImg === fq.imageNum) {
-              myQuizModalBody.classList.add('correct')
+              QuizModalBody.classList.add('correct')
               el.classList.add('correct', 'outline')
               answerResult.el_id = el.id
               answerResult.correct = 1
@@ -210,7 +234,7 @@ export default {
             }
           })
           if (!guessCorrectFromTwo) {
-            myQuizModalBody.classList.add('notcorrect')
+            QuizModalBody.classList.add('notcorrect')
             el.classList.add('notcorrect', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 0
@@ -222,7 +246,22 @@ export default {
           Settings.setLocalStorage(`score_pic_${category}`, score)
         }
         //
-        activateQuizModal.show()
+        // activateQuizModal.show()
+        if (currentQuestionCardNum === 10) {
+          QuizModal.addEventListener('hide.bs.modal', () => {
+            this.render()
+          })
+          showRoundScore()
+          activateQuizModal.show()
+          roundScoreHomeBtn.addEventListener('click', () => {
+            location.href = location.href.split('#')[0]
+            activateQuizModal.hide()
+          })
+          roundScoreNextBtn.addEventListener('click', () => {
+            location.hash = '#picture'
+            activateQuizModal.hide()
+          })
+        } else activateQuizModal.show()
       })
     })
     // console.log(answerBtns)

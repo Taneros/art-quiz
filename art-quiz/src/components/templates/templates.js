@@ -77,7 +77,6 @@ export default {
         </div>
       </div>
     </div>
-
   </div>
 </div>
   `,
@@ -121,11 +120,9 @@ export default {
             <h4 class="modal-title">{{author}} написал эту картину.</h4>
             <button id="quiz-modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <!-- Modal body -->
           <div class="modal-body">
             <div class="modal-body__answer-image" style="background-image: url('./images/img/{{correctAnswer}}.jpg');"></div>
           </div>
-          <!-- Modal footer -->
           <div class="modal-footer">
             <button id="quiz-modal-prev-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Предыдущий</button>
             <button id="quiz-modal-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующий</button>
@@ -133,6 +130,29 @@ export default {
         </div>
       </div>
     </div>
+
+    <!-- Round Score Modal -->
+    <div class="modal fade" id="quiz-modal-round-score">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title .text-center">Ваши баллы в этом раунде:</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-body__score">
+              <span id="win">5</span><span>/</span><span id="loss">5</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Домой</a>
+            <a id="quiz-modal-round-score-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующая категория</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </div>
   `,
