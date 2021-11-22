@@ -21,7 +21,7 @@ const cardImg = {
     img12: '31',
   },
   picture: {
-    img1: '59',
+    img1: '161',
     img2: '112',
     img3: '76',
     img4: '83',
@@ -76,26 +76,26 @@ export default {
     // console.log('categoriesMenuDropdown', categoriesMenuDropdown)
 
     Array.from(cards).forEach((card) => {
-      console.log(card)
+      // console.log(card)
       const currentCat = card.id.slice(0, -2)
-      console.log(`score_${quizType}_${currentCat}`)
+      // console.log(`score_${quizType}_${currentCat}`)
       const cardScoreStorage = Settings.getLocalStorage(`score_${quizType}_${currentCat}`) || Utils.resetScore()
       // get score tag
       const cardScoreWin = card.querySelector('span.badge.bg-success')
       const cardScoreLoss = card.querySelector('span.badge.bg-danger')
       const cardOverlay = card.querySelector('.overlay')
-      console.log('cardOvelay', cardOverlay)
+      // console.log('cardOvelay', cardOverlay)
       // console.log('success', cardScoreWin)
       // count wins losses
       const currentCardScore = { wins: 0, losses: 0, nulls: 0 }
-      console.log('cardScoreStorage', cardScoreStorage)
+      // console.log('cardScoreStorage', cardScoreStorage)
       cardScoreStorage.forEach((score, idx) => {
         const correct = score.correct
         if (correct) {
-          console.log('correct!')
+          // console.log('correct!')
           currentCardScore.wins += 1
         } else if (correct === null) {
-          console.log('correct = null')
+          // console.log('correct = null')
           currentCardScore.nulls += 1
         } else currentCardScore.losses += 1
       })

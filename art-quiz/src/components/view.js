@@ -20,7 +20,7 @@ export default {
 
     // get template names
     let templateItems = content.match(/[^{\}]+(?=})/gm) || []
-    console.log('templateItems', templateItems)
+    // console.log('templateItems', templateItems)
 
     if (templateItems.length) {
       templateItems.forEach((item, idx) => {
