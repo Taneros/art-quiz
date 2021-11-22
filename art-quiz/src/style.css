@@ -193,6 +193,10 @@ body {
   border-color: royalblue;
 }
 
+.pagination {
+  margin-top: 0.7rem;
+}
+
 /* Navbar styles */
 .main-nav {
   /* position: absolute; */
