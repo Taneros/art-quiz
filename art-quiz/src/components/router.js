@@ -48,6 +48,12 @@ export default {
     addEventListener('hashchange', () => {
       // handleHash()
       handleSlash()
+      const logo = document.querySelector('.game-logo')
+      // logo.classList.add('visually-hidden')
+      logo.style = 'display: none;'
+      const carousel = document.querySelector('.carousel-wrapper')
+      // carousel.classList.add('visually-hidden')
+      carousel.style = 'display: none;'
     })
     // console.log('handleHash() ->', handleHash())
     // const { routeName, params } = handleHash()
