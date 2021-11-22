@@ -33,7 +33,7 @@ function checkDoublicates(newItems) {
     console.log('less than 10 getting more')
     noDublicates.push(Model.getRandom())
     console.log(noDublicates)
-    checkDoublicates(noDublicates)
+    noDublicates = checkDoublicates(noDublicates)
     // checkDoubles(noDublicates.push(Model.getRandom()))
   }
   return noDublicates

@@ -262,6 +262,20 @@ https://getbootstrap.com/docs/5.0/components/navs-tabs/
   justify-content: space-between;
 }
 
+.modal-body__score {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal-body__score > span {
+  font-size: xx-large;
+}
+
+#quiz-modal-round-score .modal-footer {
+  justify-content: space-between;
+}
+
 /* Category Cards Styles */
 
 .author-quiz-cat.container {

@@ -33,8 +33,7 @@ function checkDoublicates(newItems) {
     console.log('less than 10 getting more')
     noDublicates.push(Model.getRandom())
     console.log(noDublicates)
-    checkDoublicates(noDublicates)
-    // checkDoubles(noDublicates.push(Model.getRandom()))
+    noDublicates = checkDoublicates(noDublicates)
   }
   return noDublicates
 }
@@ -89,39 +88,62 @@ export default {
 
     // TODO
     /**
-     * 
-     * prev next main disabled enanbled
      *
-     * categories dropdown implement
-     * 
-     *       // get score tag
-      const cardScoreWin = card.querySelector('span.badge.bg-success')
-      const cardScoreLoss = card.querySelector('span.badge.bg-danger')
-
-      console.log('success', cardScoreWin)
-      // count wins losses
-      const currectCardScore = { wins: 0, losses: 0, nulls: 0 }
-      cardScoreStorage.forEach((score, idx) => {
-        const correct = score.correct
-        if (correct) currectCardScore.wins += 1
-        else if (correct === null) currectCardScore.nulls += 1
-        else currectCardScore.losses += 1
-      })
-      // render score
-      cardScoreWin.innerHTML = `${currectCardScore.wins}`
-      cardScoreLoss.innerHTML = `${currectCardScore.losses}`
-      
-     * 
+     * track score if wins + loss = 10 > show round score
+     *
      */
 
-    let QuizModalBody = document.querySelector('.modal-body')
+    // Modal for answer scrore
     const QuizModal = document.getElementById('quiz-modal')
+    const QuizModalBody = document.querySelector('.modal-body')
     const QuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
     const QuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
     const QuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
     const mainPrevBtn = document.getElementById('prev')
     const mainNextBtn = document.getElementById('next')
-    const activateQuizModal = new bootstrap.Modal(QuizModal)
+    const activateQuizModal = new bootstrap.Modal(QuizModal, { backdrop: true })
+
+    // Modal for round results scrore
+    const QuizRoundResult = document.getElementById('quiz-modal-round-score')
+    const activateQuizRoundModal = new bootstrap.Modal(QuizRoundResult, { backdrop: true })
+    const roundScoreWin = document.getElementById('win')
+    const roundScoreLoss = document.getElementById('loss')
+    const roundScoreHomeBtn = document.getElementById('quiz-modal-round-score-home-btn')
+    const roundScoreNextBtn = document.getElementById('quiz-modal-round-score-next-btn')
+    const roundScore = { wins: 0, losses: 0, nulls: 10 }
+
+    // summ the score at the end
+    // if (currentQuestionCardNum === 10) {
+    //   score.forEach((score) => {
+    //     const correct = score.correct
+    //     if (correct) {
+    //       roundScore.wins += 1
+    //     } else if (correct === 0) roundScore.losses += 1
+    //   })
+    //   console.log('roundScore', roundScore)
+    //   if (roundScore.wins + roundScore.losses === 10) {
+    //     roundScoreWin.innerHTML = `${roundScore.wins}`
+    //     roundScoreLoss.innerHTML = `${roundScore.losses}`
+    //     QuizModal.addEventListener('hidden.bs.modal', () => {
+    //       activateQuizRoundModal.show()
+    //     })
+    //     QuizRoundResult.addEventListener('hidden.bs.modal', this.render)
+    //   }
+    // }
+    function showRoundScore() {
+      score.forEach((score) => {
+        const correct = score.correct
+        if (correct) {
+          roundScore.wins += 1
+        } else if (correct === 0) roundScore.losses += 1
+      })
+      console.log('roundScore', roundScore)
+      if (roundScore.wins + roundScore.losses === 10) {
+        roundScoreWin.innerHTML = `${roundScore.wins}`
+        roundScoreLoss.innerHTML = `${roundScore.losses}`
+        activateQuizRoundModal.show()
+      }
+    }
 
     QuizModalCloseBtn.addEventListener('click', () => {
       this.render()
@@ -202,11 +224,23 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_auth_${category}`, score)
         }
-        activateQuizModal.show()
-        // this.render()
+        if (currentQuestionCardNum === 10) {
+          QuizModal.addEventListener('hide.bs.modal', () => {
+            this.render()
+          })
+          showRoundScore()
+          activateQuizModal.show()
+          roundScoreHomeBtn.addEventListener('click', () => {
+            location.href = location.href.split('#')[0]
+            activateQuizModal.hide()
+          })
+          roundScoreNextBtn.addEventListener('click', () => {
+            location.hash = '#author'
+            activateQuizModal.hide()
+          })
+        } else activateQuizModal.show()
       })
     })
-    // console.log(answerBtns)
 
     // event listeners for prev next buttons
     prevBtn.addEventListener('click', () => {

@@ -8,6 +8,7 @@ export default {
     <div class="author-quiz__picture" style="background-image: url('./images/img/{{img}}.jpg');"></div>
     <div id="next" class="btn btn-info"><i class="fa fa-angle-right"></i></div>
   </div>
+
     <div class="pagination">
     <nav aria-label="Page navigation">
       <ul class="pagination pagination-sm">
@@ -25,6 +26,7 @@ export default {
             </ul>
           </nav>
     </div>
+
     <div class="answers">
       <div class="container">
         <ul class="answers wraper list-group">
@@ -35,20 +37,17 @@ export default {
         </ul>
       </div>
     </div>
-    <!-- The Modal -->
+    <!-- Answer Modal -->
     <div class="modal fade" id="quiz-modal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <!-- Modal Header -->
           <div class="modal-header">
             <h4 class="modal-title">{{correctAnswer}} написал эту картину.</h4>
             <button id="quiz-modal-close-btn" type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <!-- Modal body -->
           <div class="modal-body">
             <div class="modal-body__answer-image" style="background-image: url('./images/img/{{img}}.jpg');"></div>
           </div>
-          <!-- Modal footer -->
           <div class="modal-footer">
             <button id="quiz-modal-prev-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Предыдущий</button>
             <button id="quiz-modal-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующий</button>
@@ -56,6 +55,29 @@ export default {
         </div>
       </div>
     </div>
+
+    <!-- Round Score Modal -->
+    <div class="modal fade" id="quiz-modal-round-score">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title .text-center">Ваши баллы в этом раунде:</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-body__score">
+              <span id="win">5</span><span>/</span><span id="loss">5</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Домой</a>
+            <a id="quiz-modal-round-score-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующая категория</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
   `,
