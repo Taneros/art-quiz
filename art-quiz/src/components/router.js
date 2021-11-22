@@ -12,11 +12,11 @@ function getRoute() {
 function handleHash() {
   // handleSlash()
   const { quiz_type, params } = getRoute()
-  console.log('router working on hash ->', quiz_type, params)
+  // console.log('router working on hash ->', quiz_type, params)
   catsDropdownMain = document.querySelector('.nav-item.dropdown')
   if (quiz_type && params.category !== 'categories') {
     catsDropdownMain.classList.remove('visually-hidden')
-    console.log('catsDropdownMain', catsDropdownMain)
+    // console.log('catsDropdownMain', catsDropdownMain)
     const routeName = quiz_type + 'Route'
     Controller[routeName](params)
   } else {

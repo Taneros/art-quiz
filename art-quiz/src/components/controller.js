@@ -46,7 +46,7 @@ export default {
     })
     // get data from model
     const authors = Model.getAuthor(params.category)
-    console.log('authorRoute authors', authors)
+    // console.log('authorRoute authors', authors)
     // pass data to view
     Author.setData(authors, params.category)
     Author.render()
@@ -55,7 +55,7 @@ export default {
   },
 
   async pictureRoute(params) {
-    console.log('Picure Route')
+    // console.log('Picure Route')
     // menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
     // console.log('menuPictureQuiz', menuPictureQuiz)
     // set active cat
@@ -69,7 +69,7 @@ export default {
     })
     // get data from model
     const pictures = Model.getImg(params.category)
-    console.log('pictureRoute pictures:', pictures)
+    // console.log('pictureRoute pictures:', pictures)
     // pass data to view
     Picture.setData(pictures, params.category)
     Picture.render()
@@ -77,7 +77,7 @@ export default {
     setActiveGameMode(menuPictureQuiz, catDropdownNode)
   },
   async catsRoute(quiz_type, params) {
-    console.log('catsRoute')
+    // console.log('catsRoute')
     menuAuthorQuiz = document.querySelector('[data-role="menu-author"]')
     menuPictureQuiz = document.querySelector('[data-role="menu-pictures"]')
     QuizCats.setData(quiz_type)
