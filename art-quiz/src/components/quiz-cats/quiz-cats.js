@@ -21,7 +21,7 @@ const cardImg = {
     img12: '31',
   },
   picture: {
-    img1: '59',
+    img1: '161',
     img2: '112',
     img3: '76',
     img4: '83',
