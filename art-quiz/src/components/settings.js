@@ -28,4 +28,45 @@ export default {
     }
     return false
   },
+  settings() {
+    const settingsNavLink = document.getElementById('settings-nav-link')
+    const settingsModal = document.getElementById('settings')
+    const activateQuizModal = new bootstrap.Modal(settingsModal)
+
+    settingsNavLink.addEventListener('click', () => {
+      activateQuizModal.show()
+    })
+
+    const settings = this.getLocalStorage('settings') || {
+      reset: false,
+      audio: false,
+      time: false,
+    }
+
+    //TODO
+    /**
+     *
+     * function to delete local storage
+     *
+     * get button add event listener and
+     *
+     *
+     *
+     *
+     * */
+
+    // delete settings
+    const resetSettings = document.getElementById('settings-reset')
+    const saveSettings = document.getElementById('settings-save')
+    // const settings =
+
+    saveSettings.addEventListener('click', () => {
+      console.log(resetSettings.checked)
+      if (resetSettings.checked === true) {
+        localStorage.clear()
+        settings.reset = false
+      }
+      this.setLocalStorage('settings', settings)
+    })
+  },
 }
