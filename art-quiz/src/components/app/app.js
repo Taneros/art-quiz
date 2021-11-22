@@ -49,7 +49,7 @@ export class App {
             </ul>
           </li>
           <li class="nav-item" id = "settings-nav-link">
-            <a class="nav-link" href="#">Настройки</a>
+            <a class="nav-link">Настройки</a>
           </li>
         </ul>
         <!-- Settings -->
@@ -63,15 +63,15 @@ export class App {
             <div class="modal-body">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="settings-reset">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Сбросить игру</label>
+                <label class="form-check-label" for="settings-reset">Сбросить игру</label>
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="settings-audio">
-                <label class="form-check-label" for="flexSwitchCheckChecked">Звук</label>
+                <label class="form-check-label" for="settings-audio">Звук</label>
               </div>
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="settings-time">
-                <label class="form-check-label" for="flexSwitchCheckChecked">Играть на время</label>
+                <input class="form-check-input" type="checkbox" id="settings-time" disabled = "disabled">
+                <label class="form-check-label" for="settings-time">Играть на время (в разработке)</label>
               </div>
             </div>
             <div class="modal-footer">

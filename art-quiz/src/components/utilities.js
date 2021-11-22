@@ -1,3 +1,5 @@
+import Settings from './settings.js'
+
 export default {
   sliceTen(params) {
     return params.slice(0, 10)
@@ -46,5 +48,20 @@ export default {
     const path = location.hash ? location.hash.slice(1) : ''
     const [quiz_type, category] = path.split('/')
     return { quiz_type, params: { category } }
+  },
+
+  playAudioCorrect() {
+    if (Settings.settings().audio === true) {
+      const audio = new Audio('../audio/success.mp3')
+      audio.play()
+    }
+  },
+  playAudioNotcorrect() {
+    const audio = new Audio('../audio/fail.mp3')
+    audio.play()
+  },
+  playAudioFinishRound() {
+    const audio = new Audio('../audio/finish-round.mp3')
+    audio.play()
   },
 }
