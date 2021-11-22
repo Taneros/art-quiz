@@ -317,3 +317,16 @@ https://getbootstrap.com/docs/5.0/components/navs-tabs/
   background-color: #000;
   opacity: 0.5;
 }
+
+/* Settigs modal styles */
+
+#settings > div > div > div.modal-body > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#audio-level {
+  width: 50%;
+}
