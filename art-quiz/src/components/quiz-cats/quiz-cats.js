@@ -55,7 +55,7 @@ let currentCardSet
 export default {
   setData(quiz_type, params_cat) {
     // console.log('newItems, params_cat:', newItems, params_cat)
-    console.log('quiz_type, params_cat:', quiz_type, params_cat)
+    // console.log('quiz_type, params_cat:', quiz_type, params_cat)
     resultsNode = document.getElementById('results')
     if (quiz_type === 'author') {
       currentCardSet = cardImg.author
@@ -66,7 +66,7 @@ export default {
     }
   },
   render() {
-    console.log('render cats author:')
+    // console.log('render cats author:')
     resultsNode.innerHTML = View.render('quiz_cats', currentCardSet)
 
     const cards = document.getElementsByClassName('card')

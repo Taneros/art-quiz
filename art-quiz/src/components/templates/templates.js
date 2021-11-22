@@ -67,7 +67,7 @@ export default {
           </div>
           <div class="modal-body">
             <div class="modal-body__score">
-              <span id="win">5</span><span>/</span><span id="loss">5</span>
+              <span id="win" class = "text-success">5</span><span>/</span><span id="loss" class = "text-danger">5</span>
             </div>
           </div>
           <div class="modal-footer">
@@ -141,7 +141,7 @@ export default {
           </div>
           <div class="modal-body">
             <div class="modal-body__score">
-              <span id="win">5</span><span>/</span><span id="loss">5</span>
+              <span id="win" class = "text-success">5</span><span>/</span><span id="loss" class = "text-danger">5</span>
             </div>
           </div>
           <div class="modal-footer">

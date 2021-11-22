@@ -3,6 +3,7 @@ import '../../style.css'
 import Model from '../model.js'
 import View from '../view.js'
 import Router from '../router.js'
+import Settings from '../settings.js'
 
 export class App {
   constructor() {
@@ -47,10 +48,44 @@ export class App {
               <li><a class="dropdown-item" id="surrealism">Сюрреализм</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Настройки</a>
+          <li class="nav-item" id = "settings-nav-link">
+            <a class="nav-link">Настройки</a>
           </li>
         </ul>
+        <!-- Settings -->
+        <div class="modal fade" id="settings" tabindex="-1" aria-labelledby="settings" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Настройки</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="settings-reset">
+                <label class="form-check-label" for="settings-reset">Сбросить игру</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="settings-audio">
+                <label class="form-check-label" for="settings-audio">Звук</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="settings-time" disabled = "disabled">
+                <label class="form-check-label" for="settings-time">Играть на время (в разработке)</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-primary" id="settings-save">Сохранить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        const myQuizModal=document.getElementById('settings')
+        const activateQuizModal=new bootstrap.Modal(myQuizModal)
+        activateQuizModal.show()
+      </script>
       </div>
       <div class="container">
         <h1 class="visually-hidden">Art Quiz</h1>
@@ -73,5 +108,7 @@ export class App {
         console.error(e)
       }
     })()
+
+    Settings.settings()
   }
 }

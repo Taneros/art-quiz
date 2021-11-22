@@ -30,9 +30,9 @@ function checkDoublicates(newItems) {
     return [...removed, item]
   }, [])
   if (noDublicates.length < 10) {
-    console.log('less than 10 getting more')
+    // console.log('less than 10 getting more')
     noDublicates.push(Model.getRandom())
-    console.log(noDublicates)
+    // console.log(noDublicates)
     noDublicates = checkDoublicates(noDublicates)
   }
   return noDublicates
@@ -43,7 +43,7 @@ export default {
   setData(newItems, params_cat) {
     // console.log('newItems, params_cat:', newItems, params_cat)
     newItems = checkDoublicates(newItems)
-    console.log('newItems, params_cat:', newItems, params_cat)
+    // console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     category = params_cat
     items = Settings.getLocalStorage(`items_auth_${category}`) || []
@@ -81,7 +81,7 @@ export default {
 
   render() {
     // setting current author (-1 to adjust for array idx)
-    console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
+    // console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // render page
     resultsNode.innerHTML = View.render('author', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // console.log(`score_auth_${category}`)
@@ -95,7 +95,7 @@ export default {
 
     // Modal for answer scrore
     const QuizModal = document.getElementById('quiz-modal')
-    const QuizModalBody = document.querySelector('.modal-body')
+    const QuizModalBody = document.querySelector('#quiz-modal div.modal-body')
     const QuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
     const QuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
     const QuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
@@ -112,24 +112,6 @@ export default {
     const roundScoreNextBtn = document.getElementById('quiz-modal-round-score-next-btn')
     const roundScore = { wins: 0, losses: 0, nulls: 10 }
 
-    // summ the score at the end
-    // if (currentQuestionCardNum === 10) {
-    //   score.forEach((score) => {
-    //     const correct = score.correct
-    //     if (correct) {
-    //       roundScore.wins += 1
-    //     } else if (correct === 0) roundScore.losses += 1
-    //   })
-    //   console.log('roundScore', roundScore)
-    //   if (roundScore.wins + roundScore.losses === 10) {
-    //     roundScoreWin.innerHTML = `${roundScore.wins}`
-    //     roundScoreLoss.innerHTML = `${roundScore.losses}`
-    //     QuizModal.addEventListener('hidden.bs.modal', () => {
-    //       activateQuizRoundModal.show()
-    //     })
-    //     QuizRoundResult.addEventListener('hidden.bs.modal', this.render)
-    //   }
-    // }
     function showRoundScore() {
       score.forEach((score) => {
         const correct = score.correct
@@ -213,11 +195,13 @@ export default {
           el.classList.add('correct')
           answerResult.el_id = el.id
           answerResult.correct = 1
+          Utils.playAudioCorrect()
         } else {
           QuizModalBody.classList.add('notcorrect')
           el.classList.add('notcorrect')
           answerResult.el_id = el.id
           answerResult.correct = 0
+          Utils.playAudioNotcorrect()
         }
         if (!score[currentQuestionCardNum - 1].el_id) {
           score[currentQuestionCardNum - 1].el_id = answerResult.el_id
@@ -230,6 +214,7 @@ export default {
             this.render()
           })
           showRoundScore()
+          Utils.playAudioFinishRound()
           activateQuizModal.show()
           roundScoreHomeBtn.addEventListener('click', () => {
             location.href = location.href.split('#')[0]
