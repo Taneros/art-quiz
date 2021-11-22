@@ -84,11 +84,10 @@ export class App {
           </div>
         </div>
       </div>
-      <script>
-        const myQuizModal=document.getElementById('settings')
-        const activateQuizModal=new bootstrap.Modal(myQuizModal)
-        activateQuizModal.show()
-      </script>
+      </div>
+      <!-- Logo -->
+      <div class="game-logo">
+        <div class="game-logo container"></div>
       </div>
       <div class="container">
         <h1 class="visually-hidden">Art Quiz</h1>
@@ -98,6 +97,41 @@ export class App {
             <a href="#picture" data-role="menu-pictures" class="main-menu__pictures button btn btn-info">По Произведению</a>
           </div>
         </div>
+        <!-- Carousel -->
+        <div class="carousel-wrapper">
+        <!-- Carousel -->
+        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+
+          <!-- Indicators/dots -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"></button>
+          </div>
+
+          <!-- The slideshow/carousel -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="./images/img/12.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+              <img src="./images/img/50.jpg" alt="Chicago" class="d-block" style="width:100%">
+            </div>
+            <div class="carousel-item">
+              <img src="./images/img/125.jpg" alt="New York" class="d-block" style="width:100%">
+            </div>
+          </div>
+
+          <!-- Left and right controls/icons -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+
+      </div>
         <div id="results"></div>
     </div>
     <footer></footer>
@@ -111,7 +145,6 @@ export class App {
         console.error(e)
       }
     })()
-
     Settings.settings()
   }
 }
