@@ -57,11 +57,15 @@ export default {
     }
   },
   playAudioNotcorrect() {
-    const audio = new Audio('../audio/fail.mp3')
-    audio.play()
+    if (Settings.settings().audio === true) {
+      const audio = new Audio('../audio/fail.mp3')
+      audio.play()
+    }
   },
   playAudioFinishRound() {
-    const audio = new Audio('../audio/finish-round.mp3')
-    audio.play()
+    if (Settings.settings().audio === true) {
+      const audio = new Audio('../audio/finish-round.mp3')
+      audio.play()
+    }
   },
 }
