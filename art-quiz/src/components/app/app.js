@@ -66,8 +66,11 @@ export class App {
                 <label class="form-check-label" for="settings-reset">Сбросить игру</label>
               </div>
               <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="settings-audio">
-                <label class="form-check-label" for="settings-audio">Звук</label>
+                <div class="setting-audio wrapper">
+                  <input class="form-check-input" type="checkbox" id="settings-audio">
+                  <label class="form-check-label" for="flexSwitchCheckChecked">Звук</label>
+                </div>
+                <input type="range" class="form-range" min="0" max="5" step="0.5" id="audio-level">
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="settings-time" disabled = "disabled">

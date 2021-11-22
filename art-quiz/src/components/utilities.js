@@ -53,18 +53,21 @@ export default {
   playAudioCorrect() {
     if (Settings.settings().audio === true) {
       const audio = new Audio('../audio/success.mp3')
+      audio.volume = Settings.settings().audio_level
       audio.play()
     }
   },
   playAudioNotcorrect() {
     if (Settings.settings().audio === true) {
       const audio = new Audio('../audio/fail.mp3')
+      audio.volume = Settings.settings().audio_level
       audio.play()
     }
   },
   playAudioFinishRound() {
     if (Settings.settings().audio === true) {
       const audio = new Audio('../audio/finish-round.mp3')
+      audio.volume = Settings.settings().audio_level
       audio.play()
     }
   },

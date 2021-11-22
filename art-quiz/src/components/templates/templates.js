@@ -71,7 +71,7 @@ export default {
             </div>
           </div>
           <div class="modal-footer">
-            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Домой</a>
+            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">В начало</a>
             <a id="quiz-modal-round-score-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующая категория</a>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
             </div>
           </div>
           <div class="modal-footer">
-            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Домой</a>
+            <a id="quiz-modal-round-score-home-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">В начало</a>
             <a id="quiz-modal-round-score-next-btn" type="button" class="btn btn-info" data-bs-dismiss="modal">Следующая категория</a>
           </div>
         </div>
