@@ -40,7 +40,7 @@ export default {
     const settings = this.getLocalStorage('settings') || {
       reset: false,
       audio: false,
-      audio_level: 2.5,
+      audio_level: 0.5,
       time: false,
     }
 
