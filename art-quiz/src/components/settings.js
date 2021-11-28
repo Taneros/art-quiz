@@ -45,14 +45,14 @@ export default {
     }
 
     settingsNavLink.addEventListener('click', () => {
-      console.log('settings audio', settings.audio)
-      if (settings.audio) audioSettings.checked = true
+      // console.log('settings audio', settings.audio)
+      audioSettings.checked = settings.audio
       audioLevelSettings.value = settings.audio_level * 5
       activateQuizModal.show()
     })
 
     audioLevelSettings.addEventListener('change', (e) => {
-      console.log('audioLevelSettings', e.target.value)
+      // console.log('audioLevelSettings', e.target.value)
       settings.audio_level = Number(e.target.value) / 5
     })
 
@@ -64,19 +64,19 @@ export default {
      * */
 
     saveSettings.addEventListener('click', () => {
-      console.log(resetSettings.checked)
-      // not needed? if?
-      if (audioSettings.checked && !resetSettings.checked) {
-        settings.audio = true
-      }
-
+      
       if (resetSettings.checked === true) {
+        console.log(resetSettings.checked)
         localStorage.clear()
         settings.reset = false
         settings.audio = false
         settings.time = false
-        settings.audio_level = false
+        settings.audio_level = 0.5
         location.href = location.href.split('#')[0]
+      }
+      else {
+        settings.audio = audioSettings.checked ? true : false
+        settings.audio_level = Number(audioLevelSettings.value) / 5
       }
       this.setLocalStorage('settings', settings)
     })
