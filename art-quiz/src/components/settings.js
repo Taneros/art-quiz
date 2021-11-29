@@ -12,6 +12,7 @@
  * store any passed settings in what parameter? and data to store
  */
 
+import Utils from './utilities'
 // window.addEventListener('load', getLocalStorage)
 // window.addEventListener('beforeunload', setLocalStorage)
 
@@ -48,7 +49,10 @@ export default {
       // console.log('settings audio', settings.audio)
       audioSettings.checked = settings.audio
       audioLevelSettings.value = settings.audio_level * 5
-      activateQuizModal.show()
+      if (!Utils.modalState.isActiveModal) activateQuizModal.show()
+      Utils.eventWithPromise(settingsModal, activateQuizModal).then(() => {
+        this.settings()
+      })
     })
 
     audioLevelSettings.addEventListener('change', (e) => {
@@ -64,7 +68,6 @@ export default {
      * */
 
     saveSettings.addEventListener('click', () => {
-      
       if (resetSettings.checked === true) {
         console.log(resetSettings.checked)
         localStorage.clear()
@@ -73,8 +76,7 @@ export default {
         settings.time = false
         settings.audio_level = 0.5
         location.href = location.href.split('#')[0]
-      }
-      else {
+      } else {
         settings.audio = audioSettings.checked ? true : false
         settings.audio_level = Number(audioLevelSettings.value) / 5
       }

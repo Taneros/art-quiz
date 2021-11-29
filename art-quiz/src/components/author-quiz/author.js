@@ -6,6 +6,11 @@ import Model from '../model.js'
 //TODO
 /**
  *
+ * move to utils
+ * fn get current question set
+ * fn check doubles
+ *
+ *
  */
 
 // let { quiz_type, params } = Utils.getRoute()
@@ -112,7 +117,8 @@ export default {
     const roundScoreNextBtn = document.getElementById('quiz-modal-round-score-next-btn')
     const roundScore = { wins: 0, losses: 0, nulls: 10 }
 
-    function showRoundScore() {
+    const showRoundScore = () => {
+      // this.render()
       score.forEach((score) => {
         const correct = score.correct
         if (correct) {
@@ -123,12 +129,18 @@ export default {
       if (roundScore.wins + roundScore.losses === 10) {
         roundScoreWin.innerHTML = `${roundScore.wins}`
         roundScoreLoss.innerHTML = `${roundScore.losses}`
-        activateQuizRoundModal.show()
+        activateQuizRoundModal.toggle()
+        Utils.eventWithPromise(QuizRoundResult, activateQuizRoundModal).then(() => {
+          this.render()
+        })
       }
     }
 
     QuizModalCloseBtn.addEventListener('click', () => {
-      this.render()
+      Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+        console.log('close event')
+        this.render()
+      })
     })
 
     QuizModalPrevBtn.addEventListener('click', () => {
@@ -210,21 +222,40 @@ export default {
         }
 
         if (currentQuestionCardNum === 10) {
-          QuizModal.addEventListener('hide.bs.modal', () => {
-            this.render()
-          })
-          showRoundScore()
-          Utils.playAudioFinishRound()
-          activateQuizModal.show()
+          if (!Utils.modalState.isActiveModal) {
+            console.log('noactive modal')
+            activateQuizModal.toggle()
+            Utils.eventWithPromise(QuizModal, activateQuizModal)
+              .then(() => {
+                showRoundScore()
+              })
+              .then(() => {
+                Utils.playAudioFinishRound()
+              })
+          }
           roundScoreHomeBtn.addEventListener('click', () => {
             location.href = location.href.split('#')[0]
-            activateQuizModal.hide()
+            activateQuizModal.toggle()
           })
           roundScoreNextBtn.addEventListener('click', () => {
             location.hash = '#author'
-            activateQuizModal.hide()
+            activateQuizModal.toggle()
           })
-        } else activateQuizModal.show()
+        } else {
+          if (!Utils.modalState.isActiveModal) {
+            activateQuizModal.toggle()
+            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+              this.render()
+            })
+          } else {
+            // repeat
+            this.render()
+            activateQuizModal.toggle()
+            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+              this.render()
+            })
+          }
+        }
       })
     })
 

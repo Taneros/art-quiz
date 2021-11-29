@@ -74,4 +74,27 @@ export default {
       audio.play()
     }
   },
+  modalState: {
+    isActiveModal: false,
+  },
+  eventWithPromise(modal, activeModal, event = 'hidden.bs.modal') {
+    this.modalState.isActiveModal = true
+    return new Promise((res) => {
+      console.log('insde promise')
+      modal.addEventListener(event, (e) => {
+        console.log('>>>event', event, 'resolved')
+        this.modalState.isActiveModal = false
+        res()
+        console.log('isActiveModal', this.modalState.isActiveModal)
+      })
+    }).then(() => {
+      activeModal.dispose()
+      console.log('>>>>disposed!')
+    })
+  },
+  trackShownModal(modal) {
+    modal.addEventListener('show.bs.modal', (e) => {
+      console.log('>>>event', e.relatedTarget, 'with event: show.bs.modal')
+    })
+  },
 }
