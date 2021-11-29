@@ -221,6 +221,10 @@ body {
   align-items: center;
 }
 
+.nav-link {
+  cursor: pointer;
+}
+
 /* 
 main nav source
 https://getbootstrap.com/docs/5.0/components/navs-tabs/
