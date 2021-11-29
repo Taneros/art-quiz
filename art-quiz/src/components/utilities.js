@@ -88,8 +88,8 @@ export default {
         console.log('isActiveModal', this.modalState.isActiveModal)
       })
     }).then(() => {
-      activeModal.dispose()
-      console.log('>>>>disposed!')
+      // activeModal.dispose()
+      // console.log('>>>>disposed!')
     })
   },
   trackShownModal(modal) {

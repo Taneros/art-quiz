@@ -32,7 +32,7 @@ export default {
   settings() {
     const settingsNavLink = document.getElementById('settings-nav-link')
     const settingsModal = document.getElementById('settings')
-    const activateQuizModal = new bootstrap.Modal(settingsModal)
+    const activateQuizModal = new bootstrap.Modal(settingsModal, { backdrop: true })
     const resetSettings = document.getElementById('settings-reset')
     const saveSettings = document.getElementById('settings-save')
     const audioSettings = document.getElementById('settings-audio')
@@ -49,10 +49,14 @@ export default {
       // console.log('settings audio', settings.audio)
       audioSettings.checked = settings.audio
       audioLevelSettings.value = settings.audio_level * 5
-      if (!Utils.modalState.isActiveModal) activateQuizModal.show()
-      Utils.eventWithPromise(settingsModal, activateQuizModal).then(() => {
+      if (!Utils.modalState.isActiveModal) {
+        activateQuizModal.toggle()
+        Utils.eventWithPromise(settingsModal, activateQuizModal).then(() => {
+          this.settings()
+        })
+      } else {
         this.settings()
-      })
+      }
     })
 
     audioLevelSettings.addEventListener('change', (e) => {
