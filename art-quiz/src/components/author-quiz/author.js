@@ -250,10 +250,10 @@ export default {
           } else {
             // repeat
             this.render()
-            activateQuizModal.toggle()
-            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
-              this.render()
-            })
+            // activateQuizModal.toggle()
+            // Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+            //   this.render()
+            // })
           }
         }
       })
