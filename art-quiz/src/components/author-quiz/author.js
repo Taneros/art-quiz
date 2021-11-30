@@ -131,6 +131,7 @@ export default {
         roundScoreLoss.innerHTML = `${roundScore.losses}`
         activateQuizRoundModal.toggle()
         Utils.eventWithPromise(QuizRoundResult, activateQuizRoundModal).then(() => {
+          Utils.playAudioFinishRound()
           this.render()
         })
       }
@@ -225,13 +226,9 @@ export default {
           if (!Utils.modalState.isActiveModal) {
             console.log('noactive modal')
             activateQuizModal.toggle()
-            Utils.eventWithPromise(QuizModal, activateQuizModal)
-              .then(() => {
-                showRoundScore()
-              })
-              .then(() => {
-                Utils.playAudioFinishRound()
-              })
+            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+              showRoundScore()
+            })
           }
           roundScoreHomeBtn.addEventListener('click', () => {
             location.href = location.href.split('#')[0]
