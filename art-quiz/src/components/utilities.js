@@ -80,12 +80,12 @@ export default {
   eventWithPromise(modal, activeModal, event = 'hidden.bs.modal') {
     this.modalState.isActiveModal = true
     return new Promise((res) => {
-      console.log('insde promise')
+      // console.log('insde promise')
       modal.addEventListener(event, (e) => {
-        console.log('>>>event', event, 'resolved')
+        // console.log('>>>event', event, 'resolved')
         this.modalState.isActiveModal = false
         res()
-        console.log('isActiveModal', this.modalState.isActiveModal)
+        // console.log('isActiveModal', this.modalState.isActiveModal)
       })
     }).then(() => {
       // activeModal.dispose()
@@ -94,7 +94,7 @@ export default {
   },
   trackShownModal(modal) {
     modal.addEventListener('show.bs.modal', (e) => {
-      console.log('>>>event', e.relatedTarget, 'with event: show.bs.modal')
+      // console.log('>>>event', e.relatedTarget, 'with event: show.bs.modal')
     })
   },
 }

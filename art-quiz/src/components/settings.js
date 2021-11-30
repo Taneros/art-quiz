@@ -51,11 +51,7 @@ export default {
       audioLevelSettings.value = settings.audio_level * 5
       if (!Utils.modalState.isActiveModal) {
         activateQuizModal.toggle()
-        Utils.eventWithPromise(settingsModal, activateQuizModal).then(() => {
-          this.settings()
-        })
-      } else {
-        this.settings()
+        Utils.eventWithPromise(settingsModal, activateQuizModal)
       }
     })
 
@@ -86,7 +82,6 @@ export default {
       }
       this.setLocalStorage('settings', settings)
     })
-
     // console.log('settings', settings)
     return settings
   },
