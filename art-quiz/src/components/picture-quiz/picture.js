@@ -105,13 +105,15 @@ export default {
   remove my from variables
   * 
   */
-
+    // Modal for answer scrore
     const QuizModal = document.getElementById('quiz-modal')
     const QuizModalBody = document.querySelector('#quiz-modal div.modal-body')
     const QuizModalCloseBtn = document.getElementById('quiz-modal-close-btn')
     const QuizModalPrevBtn = document.getElementById('quiz-modal-prev-btn')
     const QuizModalNextBtn = document.getElementById('quiz-modal-next-btn')
-    const activateQuizModal = new bootstrap.Modal(QuizModal)
+    const mainPrevBtn = document.getElementById('prev')
+    const mainNextBtn = document.getElementById('next')
+    const activateQuizModal = new bootstrap.Modal(QuizModal, { backdrop: true })
 
     // Modal for round results scrore
     const QuizRoundResult = document.getElementById('quiz-modal-round-score')
@@ -122,7 +124,7 @@ export default {
     const roundScoreNextBtn = document.getElementById('quiz-modal-round-score-next-btn')
     const roundScore = { wins: 0, losses: 0, nulls: 10 }
 
-    function showRoundScore() {
+    const showRoundScore = () => {
       score.forEach((score) => {
         const correct = score.correct
         if (correct) {
@@ -133,24 +135,32 @@ export default {
       if (roundScore.wins + roundScore.losses === 10) {
         roundScoreWin.innerHTML = `${roundScore.wins}`
         roundScoreLoss.innerHTML = `${roundScore.losses}`
-        activateQuizRoundModal.show()
+        activateQuizRoundModal.toggle()
+        Utils.eventWithPromise(QuizRoundResult, activateQuizRoundModal).then(() => {
+          Utils.playAudioFinishRound()
+          this.render()
+        })
       }
     }
 
     QuizModalCloseBtn.addEventListener('click', () => {
-      this.render()
+      Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+        console.log('close event')
+        this.render()
+      })
     })
 
     QuizModalPrevBtn.addEventListener('click', () => {
       let event = new Event('click')
       prevBtn.dispatchEvent(event)
     })
-
     // modal prev btn
     if (currentQuestionCardNum === 1) {
       QuizModalPrevBtn.classList.add('disabled')
+      mainPrevBtn.classList.add('disabled')
     } else {
       QuizModalPrevBtn.classList.remove('disabled')
+      mainPrevBtn.classList.remove('disabled')
     }
 
     // modal next btn
@@ -160,8 +170,10 @@ export default {
     })
     if (currentQuestionCardNum === 10) {
       QuizModalNextBtn.classList.add('disabled')
+      mainNextBtn.classList.add('disabled')
     } else {
       QuizModalNextBtn.classList.remove('disabled')
+      mainNextBtn.classList.remove('disabled')
     }
     // not needed?
     // // console.log(`score_pic_${category}`)
@@ -233,6 +245,7 @@ export default {
               answerResult.el_id = el.id
               answerResult.correct = 1
               guessCorrectFromTwo = true
+              Utils.playAudioCorrect()
             }
           })
           if (!guessCorrectFromTwo) {
@@ -240,6 +253,7 @@ export default {
             el.classList.add('notcorrect', 'outline')
             answerResult.el_id = el.id
             answerResult.correct = 0
+            Utils.playAudioNotcorrect()
           }
         }
         if (!score[currentQuestionCardNum - 1].el_id) {
@@ -247,24 +261,33 @@ export default {
           score[currentQuestionCardNum - 1].correct = answerResult.correct
           Settings.setLocalStorage(`score_pic_${category}`, score)
         }
-        //
-        // activateQuizModal.show()
         if (currentQuestionCardNum === 10) {
-          QuizModal.addEventListener('hide.bs.modal', () => {
-            this.render()
-          })
-          showRoundScore()
-          Utils.playAudioFinishRound()
-          activateQuizModal.show()
+          if (!Utils.modalState.isActiveModal) {
+            // console.log('noactive modal')
+            activateQuizModal.toggle()
+            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+              showRoundScore()
+            })
+          }
           roundScoreHomeBtn.addEventListener('click', () => {
             location.href = location.href.split('#')[0]
-            activateQuizModal.hide()
+            activateQuizModal.toggle()
           })
           roundScoreNextBtn.addEventListener('click', () => {
             location.hash = '#picture'
-            activateQuizModal.hide()
+            activateQuizModal.toggle()
           })
-        } else activateQuizModal.show()
+        } else {
+          if (!Utils.modalState.isActiveModal) {
+            activateQuizModal.toggle()
+            Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
+              this.render()
+            })
+          } else {
+            // repeat
+            this.render()
+          }
+        }
       })
     })
     // console.log(answerBtns)
