@@ -134,7 +134,25 @@ export class App {
       </div>
         <div id="results"></div>
     </div>
-    <footer></footer>
+    </div>
+    <footer class="footer">
+      <div class="footer__content">
+      <div class="footer__link">
+        <a href="https://github.com/taneros" target="_blank">
+          <img class="icon-git" src="./images/github.svg" alt="link">
+        </a>
+      </div>
+      <div class="footer__link">
+        <p>© 2021</p>
+      </div>
+      <div class="footer__link">
+        <a href="https://rs.school/js/" title="Link to the course" target="_blank">
+          <img class="icon-rss" src="./images/rs_school_js_grey.svg" alt="link">
+        </a>
+      </div>
+    </div>
+    </footer>
+    
     `
     ;(async () => {
       // console.log('results in DOM', !!document.getElementById('results'))
