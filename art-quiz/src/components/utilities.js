@@ -56,7 +56,7 @@ export default {
   playAudioCorrect() {
     if (Settings.settings().audio === true) {
       const audio = new Audio()
-      audio.src = '../audio/success.mp3'
+      audio.src = './audio/success.mp3'
       audio.volume = Settings.settings().audio_level
       audio.play()
     }
@@ -65,7 +65,7 @@ export default {
   playAudioNotcorrect() {
     if (Settings.settings().audio === true) {
       const audio = new Audio()
-      audio.src = '../audio/fail.mp3'
+      audio.src = './audio/fail.mp3'
       audio.volume = Settings.settings().audio_level
       audio.play()
     }
@@ -74,7 +74,7 @@ export default {
   playAudioFinishRound() {
     if (Settings.settings().audio === true) {
       const audio = new Audio()
-      audio.src = '../audio/finish-round.mp3'
+      audio.src = './audio/finish-round.mp3'
       audio.volume = Settings.settings().audio_level
       audio.play()
     }
