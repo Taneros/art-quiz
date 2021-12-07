@@ -1,4 +1,5 @@
 import Settings from './settings.js'
+import Model from './model.js'
 
 export default {
   sliceTen(params) {
@@ -12,6 +13,7 @@ export default {
     }
     return a
   },
+
   getRndItem(items, quiz_type) {
     const itemsLength = Object.keys(items).length
     const random = Math.floor(Math.random() * itemsLength)
@@ -21,6 +23,7 @@ export default {
       return items[random].author
     }
   },
+
   generateUnique(params, items, quiz_type) {
     let mySet = new Set().add(params)
     while (mySet.size < 4) {
@@ -58,6 +61,7 @@ export default {
       audio.play()
     }
   },
+
   playAudioNotcorrect() {
     if (Settings.settings().audio === true) {
       const audio = new Audio()
@@ -66,6 +70,7 @@ export default {
       audio.play()
     }
   },
+
   playAudioFinishRound() {
     if (Settings.settings().audio === true) {
       const audio = new Audio()
@@ -74,9 +79,11 @@ export default {
       audio.play()
     }
   },
+
   modalState: {
     isActiveModal: false,
   },
+
   eventWithPromise(modal, activeModal, event = 'hidden.bs.modal') {
     this.modalState.isActiveModal = true
     return new Promise((res) => {
@@ -92,9 +99,24 @@ export default {
       // console.log('>>>>disposed!')
     })
   },
+
   trackShownModal(modal) {
     modal.addEventListener('show.bs.modal', (e) => {
       // console.log('>>>event', e.relatedTarget, 'with event: show.bs.modal')
     })
+  },
+
+  checkDoublicates(newItems) {
+    let noDublicates = newItems.reduce((arr, item) => {
+      const removed = arr.filter((i) => i['author'] !== item['author'])
+      return [...removed, item]
+    }, [])
+    if (noDublicates.length < 10) {
+      // console.log('less than 10 getting more')
+      noDublicates.push(Model.getRandom())
+      // console.log(noDublicates)
+      noDublicates = this.checkDoublicates(noDublicates)
+    }
+    return noDublicates
   },
 }

@@ -1,20 +1,7 @@
 import View from '../view.js'
 import Settings from '../settings.js'
 import Utils from '../utilities.js'
-import Model from '../model.js'
 
-//TODO
-/**
- *
- * move to utils
- * fn get current question set
- * fn check doubles
- *
- *
- */
-
-// let { quiz_type, params } = Utils.getRoute()
-// console.log('params ->', params.category)
 let category
 let resultsNode
 let prevBtn
@@ -25,29 +12,11 @@ let questionPack
 let currentQuestionCardNum
 let score
 
-function getCurrentQuestionSet(params) {
-  return questionPack[params]
-}
-
-function checkDoublicates(newItems) {
-  let noDublicates = newItems.reduce((arr, item) => {
-    const removed = arr.filter((i) => i['author'] !== item['author'])
-    return [...removed, item]
-  }, [])
-  if (noDublicates.length < 10) {
-    // console.log('less than 10 getting more')
-    noDublicates.push(Model.getRandom())
-    // console.log(noDublicates)
-    noDublicates = checkDoublicates(noDublicates)
-  }
-  return noDublicates
-}
-
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
     // console.log('newItems, params_cat:', newItems, params_cat)
-    newItems = checkDoublicates(newItems)
+    newItems = Utils.checkDoublicates(newItems)
     // console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     category = params_cat
@@ -88,7 +57,7 @@ export default {
     // setting current author (-1 to adjust for array idx)
     // console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // render page
-    resultsNode.innerHTML = View.render('author', getCurrentQuestionSet(currentQuestionCardNum - 1))
+    resultsNode.innerHTML = View.render('author', questionPack[currentQuestionCardNum - 1])
     // console.log(`score_auth_${category}`)
 
     // TODO
@@ -118,14 +87,13 @@ export default {
     const roundScore = { wins: 0, losses: 0, nulls: 10 }
 
     const showRoundScore = () => {
-      // this.render()
       score.forEach((score) => {
         const correct = score.correct
         if (correct) {
           roundScore.wins += 1
         } else if (correct === 0) roundScore.losses += 1
       })
-      console.log('roundScore', roundScore)
+      // console.log('roundScore', roundScore)
       if (roundScore.wins + roundScore.losses === 10) {
         roundScoreWin.innerHTML = `${roundScore.wins}`
         roundScoreLoss.innerHTML = `${roundScore.losses}`
@@ -139,7 +107,7 @@ export default {
 
     QuizModalCloseBtn.addEventListener('click', () => {
       Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
-        console.log('close event')
+        // console.log('close event')
         this.render()
       })
     })
@@ -162,7 +130,6 @@ export default {
       let event = new Event('click')
       nextBtn.dispatchEvent(event)
     })
-
     if (currentQuestionCardNum === 10) {
       QuizModalNextBtn.classList.add('disabled')
       mainNextBtn.classList.add('disabled')
@@ -202,7 +169,7 @@ export default {
       el.addEventListener('click', () => {
         let answerResult = { el_id: '', correct: 0 }
         // console.log(el.innerHTML)
-        if (el.innerHTML === items.filter((el) => el.imageNum === getCurrentQuestionSet(currentQuestionCardNum - 1).img)[0].author) {
+        if (el.innerHTML === items.filter((el) => el.imageNum === questionPack[currentQuestionCardNum - 1].img)[0].author) {
           // console.log('correct!')
           QuizModalBody.classList.add('correct')
           el.classList.add('correct')
@@ -224,7 +191,7 @@ export default {
 
         if (currentQuestionCardNum === 10) {
           if (!Utils.modalState.isActiveModal) {
-            console.log('noactive modal')
+            // console.log('noactive modal')
             activateQuizModal.toggle()
             Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
               showRoundScore()
@@ -247,10 +214,6 @@ export default {
           } else {
             // repeat
             this.render()
-            // activateQuizModal.toggle()
-            // Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
-            //   this.render()
-            // })
           }
         }
       })

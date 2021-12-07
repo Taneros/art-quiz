@@ -1,11 +1,7 @@
 import View from '../view.js'
 import Settings from '../settings.js'
 import Utils from '../utilities.js'
-import Model from '../model.js'
-// import templates from '../templates/templates.js'
 
-// let { quiz_type, params } = Utils.getRoute()
-// console.log('params ->', params.category)
 let category
 let resultsNode
 let mainMenuNode
@@ -18,34 +14,12 @@ let currentQuestionCardNum
 let score
 let answers
 
-function getCurrentQuestionSet(params) {
-  return questionPack[params]
-}
-
-function makeRundomPack(params) {}
-
-function checkDoublicates(newItems) {
-  let noDublicates = newItems.reduce((arr, item) => {
-    const removed = arr.filter((i) => i['author'] !== item['author'])
-    return [...removed, item]
-  }, [])
-  if (noDublicates.length < 10) {
-    // console.log('less than 10 getting more')
-    noDublicates.push(Model.getRandom())
-    // console.log(noDublicates)
-    noDublicates = checkDoublicates(noDublicates)
-    // checkDoubles(noDublicates.push(Model.getRandom()))
-  }
-  return noDublicates
-}
-
 export default {
   // save info from Model for rendering
   setData(newItems, params_cat) {
     // console.log('no doubles', checkDoublicates(newItems))
-    // newItems = checkDoublicates(newItems)
     // console.log('new', checkDoublicates(newItems))
-    newItems = checkDoublicates(newItems)
+    newItems = Utils.checkDoublicates(newItems)
     // console.log('newItems, params_cat:', newItems, params_cat)
     resultsNode = document.getElementById('results')
     mainMenuNode = document.getElementsByClassName('main-menu')
@@ -69,12 +43,6 @@ export default {
         // grab an image
         singleQuestionData.author = el.author
 
-        //TODO
-        /**
-         * redo image generation
-         * get an generate pack of 10 generateUnique
-         * get random from model
-         * */
         // console.log('correct image', el.imageNum)
         answers[`${el.author}`] = el.imageNum
         singleQuestionData.correctAnswer = el.imageNum
@@ -96,15 +64,8 @@ export default {
     // console.log('render getCurrentQuestionSet:', getCurrentQuestionSet(currentQuestionCardNum - 1))
     // console.log('answers:', answers)
     // render page
-    resultsNode.innerHTML = View.render('picture', getCurrentQuestionSet(currentQuestionCardNum - 1))
+    resultsNode.innerHTML = View.render('picture', questionPack[currentQuestionCardNum - 1])
 
-    //TODO
-    /**
-  make search correct function and reuse for answer chack and overlay
-  * 
-  remove my from variables
-  * 
-  */
     // Modal for answer scrore
     const QuizModal = document.getElementById('quiz-modal')
     const QuizModalBody = document.querySelector('#quiz-modal div.modal-body')
@@ -145,7 +106,7 @@ export default {
 
     QuizModalCloseBtn.addEventListener('click', () => {
       Utils.eventWithPromise(QuizModal, activateQuizModal).then(() => {
-        console.log('close event')
+        // console.log('close event')
         this.render()
       })
     })
@@ -175,10 +136,6 @@ export default {
       QuizModalNextBtn.classList.remove('disabled')
       mainNextBtn.classList.remove('disabled')
     }
-    // not needed?
-    // // console.log(`score_pic_${category}`)
-    // score = Settings.getLocalStorage(`score_pic_${category}`) || Utils.resetScore()
-    // // console.log('render-score:', score)
 
     score.forEach((el, idx) => {
       // console.log('el.correct', el.correct)
@@ -218,7 +175,7 @@ export default {
         // console.log('currentCardImg', currentCardImg)
         // console.log('getCurrentQuestionSet(currentQuestionCardNum - 1).img)[0]', getCurrentQuestionSet(currentQuestionCardNum - 1))
         // filter questions for current question pack
-        const filteredQs = items.filter((el) => el.author === getCurrentQuestionSet(currentQuestionCardNum - 1).author)
+        const filteredQs = items.filter((el) => el.author === questionPack[currentQuestionCardNum - 1].author)
         // condition for more than two pictures in questions of the same author in set
         if (filteredQs.length === 1) {
           if (currentCardImg === filteredQs[0].imageNum) {
